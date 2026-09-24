@@ -2,19 +2,84 @@
 
 @layer base {
   body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+    background-color: #08090c;
+    color: #f8fafc;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
   }
 }
 
-/* Simple clean card styling */
-.clean-card {
-  background-color: #0f172a;
-  border: 1px solid #1e293b;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+/* Stadium Marquee Ticker Animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
 }
 
-.clean-card:hover {
-  border-color: #38bdf8;
+.animate-marquee {
+  display: flex;
+  width: 200%;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Arena Ticket Notches */
+.ticket-notch {
+  position: relative;
+}
+
+.ticket-notch::before,
+.ticket-notch::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  background-color: #08090c;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.ticket-notch::before {
+  left: -8px;
+}
+
+.ticket-notch::after {
+  right: -8px;
+}
+
+/* Sharp Brutalist Corner Clip-path */
+.clip-corner {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 12px) 0,
+    100% 12px,
+    100% 100%,
+    12px 100%,
+    0 calc(100% - 12px)
+  );
+}
+
+.clip-corner-lg {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 24px) 0,
+    100% 24px,
+    100% 100%,
+    24px 100%,
+    0 calc(100% - 24px)
+  );
 }
 
 /* Custom Scrollbar */
@@ -24,14 +89,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #090a0f;
+  background: #08090c;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 3px;
+  background: #1e2433;
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0284c7;
+  background: #ff2a00;
 }
