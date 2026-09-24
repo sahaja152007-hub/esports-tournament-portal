@@ -1,7 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function HomePage({ onNavigateToFixtures }) {
   const [activeTab, setActiveTab] = useState('fifa');
+
+  // IntersectionObserver for scroll-triggered reveal animations
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -40px 0px'
+    };
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(section => {
+      revealObserver.observe(section);
+    });
+
+    return () => revealObserver.disconnect();
+  }, []);
 
   const gameModes = {
     fifa: {
@@ -31,7 +53,11 @@ export default function HomePage({ onNavigateToFixtures }) {
     <div className="flex flex-col gap-16 md:gap-24 w-full">
       
       {/* Minimal Hero Section - Stitch Export */}
-      <section className="flex flex-col items-center text-center gap-4 pt-4">
+      <section className="flex flex-col items-center text-center gap-4 pt-4 reveal-on-scroll">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1e2024] border border-[#282a2e] text-xs font-mono text-[#bdf4ff] uppercase tracking-widest">
+          <span className="w-2 h-2 rounded-full bg-[#ff5167] animate-radar"></span>
+          <span>Championship 2026</span>
+        </div>
         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl uppercase tracking-tight text-[#e2e2e8] leading-none">
           NEXUS <span className="text-[#ff5167]">ARENA</span> <span className="text-[#00e3fd]">'26</span>
         </h1>
@@ -41,7 +67,7 @@ export default function HomePage({ onNavigateToFixtures }) {
         <div className="pt-4">
           <button 
             onClick={onNavigateToFixtures}
-            className="inline-flex items-center gap-2 px-8 py-3 bg-[#ff5167] hover:bg-[#00e3fd] text-[#680019] hover:text-[#001f24] font-mono text-sm uppercase tracking-wider font-bold transition-all duration-200 clip-chamfer shadow-lg cursor-pointer"
+            className="btn-cyber-glow btn-tactile inline-flex items-center gap-2 px-8 py-3 bg-[#ff5167] hover:bg-[#00e3fd] text-[#680019] hover:text-[#001f24] font-mono text-sm uppercase tracking-wider font-bold transition-all duration-200 clip-chamfer shadow-lg cursor-pointer"
           >
             <span>View Teams &amp; Fixtures</span>
             <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
@@ -50,23 +76,23 @@ export default function HomePage({ onNavigateToFixtures }) {
       </section>
 
       {/* Minimal Highlights Section: Exactly 3 Stat Cards - Stitch Export */}
-      <section className="w-full">
+      <section className="w-full reveal-on-scroll">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
           
           {/* Stat 1: Prize Pool */}
-          <div className="p-6 bg-[#1e2024] shadow-md flex flex-col items-center text-center gap-1 clip-chamfer border border-[#282a2e]">
+          <div className="card-cyber p-6 bg-[#1e2024] shadow-md flex flex-col items-center text-center gap-1 clip-chamfer border border-[#282a2e] hover:border-[#ff5167]/60">
             <span className="font-mono text-xs text-[#e6bcbd] uppercase tracking-widest">PRIZE POOL</span>
             <span className="font-display text-3xl sm:text-4xl text-[#ff5167] font-bold leading-none mt-1">₹5,00,000</span>
           </div>
 
           {/* Stat 2: Format */}
-          <div className="p-6 bg-[#1e2024] shadow-md flex flex-col items-center text-center gap-1 clip-chamfer border border-[#282a2e]">
+          <div className="card-cyber p-6 bg-[#1e2024] shadow-md flex flex-col items-center text-center gap-1 clip-chamfer border border-[#282a2e] hover:border-[#00e3fd]/60">
             <span className="font-mono text-xs text-[#e6bcbd] uppercase tracking-widest">FORMAT</span>
             <span className="font-display text-2xl sm:text-3xl text-[#bdf4ff] font-bold leading-none mt-1">SINGLE ELIMINATION</span>
           </div>
 
           {/* Stat 3: Teams */}
-          <div className="p-6 bg-[#1e2024] shadow-md flex flex-col items-center text-center gap-1 clip-chamfer border border-[#282a2e]">
+          <div className="card-cyber p-6 bg-[#1e2024] shadow-md flex flex-col items-center text-center gap-1 clip-chamfer border border-[#282a2e] hover:border-[#e2e2e8]/60">
             <span className="font-mono text-xs text-[#e6bcbd] uppercase tracking-widest">TEAMS</span>
             <span className="font-display text-3xl sm:text-4xl text-[#e2e2e8] font-bold leading-none mt-1">32 SQUADS</span>
           </div>
@@ -75,7 +101,7 @@ export default function HomePage({ onNavigateToFixtures }) {
       </section>
 
       {/* Tournament Game Disciplines */}
-      <section className="w-full max-w-4xl mx-auto space-y-6">
+      <section className="w-full max-w-4xl mx-auto space-y-6 reveal-on-scroll">
         <div className="text-center space-y-1">
           <span className="font-mono text-xs text-[#ff5167] uppercase tracking-widest">FEATURED DISCIPLINES</span>
           <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#e2e2e8] uppercase">COMPETITIVE GAMES</h2>
@@ -87,7 +113,7 @@ export default function HomePage({ onNavigateToFixtures }) {
             <button
               key={key}
               onClick={() => setActiveTab(key)}
-              className={`px-5 py-2.5 font-mono text-xs uppercase tracking-wider transition clip-chamfer border ${
+              className={`btn-tactile px-5 py-2.5 font-mono text-xs uppercase tracking-wider transition clip-chamfer border ${
                 activeTab === key 
                   ? 'bg-[#ff5167] text-[#5b0015] font-bold border-[#ff5167]' 
                   : 'bg-[#1e2024] text-[#e6bcbd] hover:text-[#e2e2e8] border-[#282a2e]'
@@ -99,7 +125,7 @@ export default function HomePage({ onNavigateToFixtures }) {
         </div>
 
         {/* Game Detail Chamfer Card */}
-        <div className="p-6 bg-[#1e2024] border border-[#282a2e] clip-chamfer-lg grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+        <div className="card-cyber p-6 bg-[#1e2024] border border-[#282a2e] clip-chamfer-lg grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
           <div className="md:col-span-2 space-y-3">
             <span className="text-3xl">{gameModes[activeTab].icon}</span>
             <h3 className="font-display text-2xl font-bold text-[#e2e2e8] uppercase">{gameModes[activeTab].title}</h3>

@@ -58,6 +58,28 @@ export default function TeamFixturePage() {
     localStorage.setItem('nexus_matches', JSON.stringify(matches));
   }, [matches]);
 
+  // Scroll reveal observer for major sections
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -40px 0px'
+    };
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(section => {
+      revealObserver.observe(section);
+    });
+
+    return () => revealObserver.disconnect();
+  }, [activeTab]);
+
   // Auto-generate initial single-elimination fixtures if teams exist but no matches generated yet
   useEffect(() => {
     if (teams.length >= 2 && matches.length === 0) {
@@ -385,7 +407,7 @@ export default function TeamFixturePage() {
     <div className="space-y-8 pb-12 w-full">
 
       {/* Stitch Telemetry Header Bar */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-[#1e2024] p-6 clip-chamfer border border-[#282a2e]">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-[#1e2024] p-6 clip-chamfer border border-[#282a2e] reveal-on-scroll">
         <div>
           <span className="font-mono text-xs text-[#e6bcbd] uppercase tracking-widest block">
             TELEMETRY NODE // TOURNAMENT HUB
@@ -399,21 +421,21 @@ export default function TeamFixturePage() {
         <div className="flex flex-wrap items-center gap-2.5 w-full sm:w-auto font-mono text-xs">
           <button 
             onClick={() => { setFormError(''); setIsAddTeamModalOpen(true); }}
-            className="px-4 py-2.5 bg-[#ff5167] hover:bg-[#00e3fd] text-[#5b0015] hover:text-[#001f24] font-bold uppercase tracking-wider transition clip-chamfer flex items-center gap-1.5 cursor-pointer"
+            className="btn-tactile btn-cyber-glow px-4 py-2.5 bg-[#ff5167] hover:bg-[#00e3fd] text-[#5b0015] hover:text-[#001f24] font-bold uppercase tracking-wider transition clip-chamfer flex items-center gap-1.5 cursor-pointer"
           >
             <Plus className="w-4 h-4 stroke-[3]" /> Add New Team
           </button>
           
           <button 
             onClick={() => { setFormError(''); setIsAddPlayerModalOpen(true); }}
-            className="px-4 py-2.5 bg-[#282a2e] hover:bg-[#333539] text-[#bdf4ff] border border-[#333539] font-bold uppercase tracking-wider transition clip-chamfer flex items-center gap-1.5 cursor-pointer"
+            className="btn-tactile px-4 py-2.5 bg-[#282a2e] hover:bg-[#333539] text-[#bdf4ff] border border-[#333539] font-bold uppercase tracking-wider transition clip-chamfer flex items-center gap-1.5 cursor-pointer"
           >
             <UserPlus className="w-4 h-4 text-[#00e3fd]" /> Add Participant
           </button>
 
           <button 
             onClick={handleQuickLoadPresets}
-            className="px-3 py-2.5 bg-[#282a2e] hover:bg-[#333539] text-[#e2e2e8] border border-[#333539] font-mono text-xs clip-chamfer cursor-pointer"
+            className="btn-tactile px-3 py-2.5 bg-[#282a2e] hover:bg-[#333539] text-[#e2e2e8] border border-[#333539] font-mono text-xs clip-chamfer cursor-pointer"
             title="Load Preset Teams"
           >
             Load 5 Sample Teams
@@ -421,7 +443,7 @@ export default function TeamFixturePage() {
 
           <button 
             onClick={handleReset}
-            className="p-2.5 bg-[#282a2e] hover:bg-[#93000a] text-[#e2e2e8] hover:text-[#ffdad6] border border-[#333539] transition clip-chamfer cursor-pointer"
+            className="btn-tactile p-2.5 bg-[#282a2e] hover:bg-[#93000a] text-[#e2e2e8] hover:text-[#ffdad6] border border-[#333539] transition clip-chamfer cursor-pointer"
             title="Reset All Data"
           >
             <RefreshCw className="w-4 h-4" />
@@ -430,11 +452,11 @@ export default function TeamFixturePage() {
       </div>
 
       {/* Main Tab Switcher */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-b border-[#282a2e] pb-4">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-b border-[#282a2e] pb-4 reveal-on-scroll">
         <div className="flex items-center gap-2 font-mono text-xs">
           <button 
             onClick={() => setActiveTab('fixtures')}
-            className={`px-5 py-2.5 font-bold uppercase tracking-wider transition clip-chamfer ${
+            className={`btn-tactile px-5 py-2.5 font-bold uppercase tracking-wider transition clip-chamfer ${
               activeTab === 'fixtures' ? 'bg-[#ff5167] text-[#5b0015]' : 'bg-[#1e2024] text-[#e6bcbd] border border-[#282a2e] hover:text-[#e2e2e8]'
             }`}
           >
@@ -442,7 +464,7 @@ export default function TeamFixturePage() {
           </button>
           <button 
             onClick={() => setActiveTab('teams')}
-            className={`px-5 py-2.5 font-bold uppercase tracking-wider transition clip-chamfer ${
+            className={`btn-tactile px-5 py-2.5 font-bold uppercase tracking-wider transition clip-chamfer ${
               activeTab === 'teams' ? 'bg-[#ff5167] text-[#5b0015]' : 'bg-[#1e2024] text-[#e6bcbd] border border-[#282a2e] hover:text-[#e2e2e8]'
             }`}
           >
@@ -521,7 +543,7 @@ export default function TeamFixturePage() {
         <div className="space-y-10">
           
           {/* SECTION 1: TEAMS LIST */}
-          <div className="space-y-4">
+          <div className="space-y-4 reveal-on-scroll">
             <div className="flex justify-between items-center border-b border-[#282a2e] pb-3">
               <div>
                 <span className="text-xs font-mono text-[#ff5167] uppercase font-bold tracking-widest block">
@@ -533,7 +555,7 @@ export default function TeamFixturePage() {
               </div>
               <button 
                 onClick={() => { setFormError(''); setIsAddTeamModalOpen(true); }}
-                className="px-4 py-2 bg-[#ff5167] hover:bg-[#00e3fd] text-[#5b0015] hover:text-[#001f24] font-mono font-bold text-xs uppercase tracking-wider flex items-center gap-1 transition clip-chamfer cursor-pointer"
+                className="btn-tactile btn-cyber-glow px-4 py-2 bg-[#ff5167] hover:bg-[#00e3fd] text-[#5b0015] hover:text-[#001f24] font-mono font-bold text-xs uppercase tracking-wider flex items-center gap-1 transition clip-chamfer cursor-pointer"
               >
                 <Plus className="w-4 h-4 stroke-[3]" /> Add Team
               </button>
@@ -546,7 +568,7 @@ export default function TeamFixturePage() {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {teams.map(team => (
-                  <div key={team.id} className="bg-[#1e2024] clip-chamfer border border-[#282a2e] p-5 space-y-4 relative">
+                  <div key={team.id} className="team-card animate-card-enter bg-[#1e2024] clip-chamfer border border-[#282a2e] p-5 space-y-4 relative">
                     
                     {/* Team Pass Header */}
                     <div className="flex items-center justify-between border-b border-[#282a2e] pb-3">
@@ -564,7 +586,7 @@ export default function TeamFixturePage() {
 
                       <button 
                         onClick={() => handleDeleteTeam(team.id)}
-                        className="text-[#e6bcbd] hover:text-[#ffb4ab] p-1 transition cursor-pointer"
+                        className="btn-tactile text-[#e6bcbd] hover:text-[#ffb4ab] p-1 transition cursor-pointer"
                         title="Delete Team"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -580,7 +602,7 @@ export default function TeamFixturePage() {
                         </div>
                       ) : (
                         team.members.map(m => (
-                          <div key={m.id} className="flex justify-between items-center p-2 bg-[#111318] border border-[#282a2e] clip-chamfer">
+                          <div key={m.id} className="animate-card-enter flex justify-between items-center p-2 bg-[#111318] border border-[#282a2e] clip-chamfer">
                             <div>
                               <div className="font-semibold text-[#e2e2e8]">{m.name}</div>
                               <div className="text-[10px] text-[#e6bcbd]">{m.tag}</div>
@@ -591,7 +613,7 @@ export default function TeamFixturePage() {
                               </span>
                               <button 
                                 onClick={() => handleDeletePlayer(team.id, m.id)}
-                                className="text-[#e6bcbd] hover:text-[#ffb4ab] px-1 font-bold text-sm cursor-pointer"
+                                className="btn-tactile text-[#e6bcbd] hover:text-[#ffb4ab] px-1 font-bold text-sm cursor-pointer"
                                 title="Remove participant"
                               >
                                 ×
@@ -609,7 +631,7 @@ export default function TeamFixturePage() {
           </div>
 
           {/* SECTION 2: PARTICIPANTS TABLE */}
-          <div className="space-y-4">
+          <div className="space-y-4 reveal-on-scroll">
             <div className="flex justify-between items-center border-b border-[#282a2e] pb-3">
               <div>
                 <span className="text-xs font-mono text-[#ff5167] uppercase font-bold tracking-widest block">
@@ -621,7 +643,7 @@ export default function TeamFixturePage() {
               </div>
               <button 
                 onClick={() => { setFormError(''); setIsAddPlayerModalOpen(true); }}
-                className="px-4 py-2 bg-[#282a2e] hover:bg-[#333539] text-[#bdf4ff] border border-[#333539] font-mono font-bold text-xs uppercase tracking-wider flex items-center gap-1 transition clip-chamfer cursor-pointer"
+                className="btn-tactile px-4 py-2 bg-[#282a2e] hover:bg-[#333539] text-[#bdf4ff] border border-[#333539] font-mono font-bold text-xs uppercase tracking-wider flex items-center gap-1 transition clip-chamfer cursor-pointer"
               >
                 <UserPlus className="w-4 h-4 text-[#00e3fd]" /> Add Participant
               </button>
@@ -648,7 +670,7 @@ export default function TeamFixturePage() {
                     </tr>
                   ) : (
                     allParticipants.map((p, index) => (
-                      <tr key={p.id} className="hover:bg-[#282a2e]/50 transition">
+                      <tr key={p.id} className="animate-card-enter hover:bg-[#282a2e]/50 transition">
                         <td className="py-3 px-4 text-[#e6bcbd] font-bold">{index + 1}</td>
                         <td className="py-3 px-4 font-bold text-[#e2e2e8] font-body">{p.name}</td>
                         <td className="py-3 px-4 text-[#ff5167] font-bold">{p.tag}</td>

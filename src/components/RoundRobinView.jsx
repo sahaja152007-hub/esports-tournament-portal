@@ -177,7 +177,8 @@ export default function RoundRobinView({ matches, teams, onSelectMatch, onSimula
               <div 
                 key={match.id}
                 onClick={() => onSelectMatch(match)}
-                className="p-4 bg-[#1e2024] clip-chamfer border border-[#282a2e] hover:border-[#333539] cursor-pointer transition space-y-3"
+                style={{ animationDelay: `${i * 0.08}s` }}
+                className="animate-fixture-cascade p-4 bg-[#1e2024] clip-chamfer border border-[#282a2e] hover:border-[#333539] cursor-pointer transition space-y-3"
               >
                 {/* MATCH HEADER */}
                 <div className="flex justify-between items-center text-xs font-mono border-b border-[#282a2e] pb-2">

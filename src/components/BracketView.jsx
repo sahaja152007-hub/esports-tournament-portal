@@ -171,7 +171,7 @@ function ClearMatchCard({ match, onSelectMatch, onSimulateMatch, cardClass, isFi
   };
 
   return (
-    <div className={`relative p-4 transition-all clip-chamfer border ${cardClass} ${isFinal ? 'border-[#ff5167]' : ''}`}>
+    <div className={`animate-fixture-cascade relative p-4 transition-all clip-chamfer border ${cardClass} ${isFinal ? 'border-[#ff5167]' : ''}`}>
       {/* Header */}
       <div className="flex items-center justify-between border-b border-[#282a2e] pb-2.5 mb-3 font-mono">
         <span className="font-bold text-xs text-[#ff5167] tracking-wider">
