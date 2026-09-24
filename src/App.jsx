@@ -13,10 +13,13 @@ export default function App() {
   };
 
   return (
-    <div className="bg-[#111318] font-body text-[#e2e2e8] selection:bg-[#ff5167] selection:text-[#5b0015] min-h-screen flex flex-col justify-between">
-      
+    <div className="bg-[#111318] cyber-grid font-body text-[#e2e2e8] selection:bg-[#ff5167] selection:text-[#5b0015] min-h-screen flex flex-col justify-between relative overflow-x-hidden">
+      {/* Radial ambient glow overlays */}
+      <div className="fixed top-0 left-1/4 w-96 h-96 bg-[#ff5167]/5 rounded-full blur-3xl pointer-events-none -z-10"></div>
+      <div className="fixed bottom-1/4 right-1/4 w-96 h-96 bg-[#00e3fd]/5 rounded-full blur-3xl pointer-events-none -z-10"></div>
+
       {/* Stitch Header */}
-      <header className="w-full bg-[#0c0e12]/90 backdrop-blur-xl border-b border-[#282a2e] sticky top-0 z-50">
+      <header className="w-full bg-[#0c0e12]/80 backdrop-blur-md border-b border-[#282a2e] sticky top-0 z-50 transition-all duration-300">
         <div className="h-20 max-w-6xl mx-auto px-4 md:px-12 flex items-center justify-between">
           
           {/* Brand Logo */}
