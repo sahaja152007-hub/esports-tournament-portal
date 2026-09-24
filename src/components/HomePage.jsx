@@ -150,6 +150,39 @@ export default function HomePage({ onNavigateToFixtures }) {
         </div>
       </section>
 
+      {/* Collegiate Division Closing CTA Section */}
+      <section className="w-full max-w-4xl mx-auto reveal-on-scroll card-cyber relative p-8 md:p-12 bg-[#1e2024] border border-[#282a2e] clip-chamfer-lg shadow-xl flex flex-col items-center text-center gap-6 overflow-hidden">
+        <div className="corner-bracket absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#00e3fd] opacity-60"></div>
+        
+        {/* Pill/Badge Label */}
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#111318] border border-[#282a2e] text-xs font-mono text-[#ff5167] uppercase tracking-widest font-bold">
+          <span className="text-[#ff5167] text-[10px]">●</span>
+          <span>COLLEGIATE DIVISION</span>
+        </div>
+
+        {/* Large Bold Heading */}
+        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight text-[#e2e2e8] leading-tight max-w-2xl font-black">
+          ARE YOU READY TO <span className="text-[#ff5167]">REPRESENT</span> YOUR CAMPUS?
+        </h2>
+
+        {/* Subheading */}
+        <p className="font-body text-base sm:text-lg text-[#bdf4ff] max-w-md">
+          Assemble your squad. Battle for collegiate glory.
+        </p>
+
+        {/* CTA Button */}
+        <div className="pt-2">
+          <button
+            onClick={onNavigateToFixtures}
+            className="btn-cyber-glow btn-tactile inline-flex items-center gap-2 px-6 py-3 bg-[#ff5167] hover:bg-[#00e3fd] text-[#5b0015] hover:text-[#001f24] font-mono text-sm uppercase tracking-wider font-bold clip-chamfer shadow-lg cursor-pointer transition-all duration-200"
+          >
+            <span className="material-symbols-outlined text-[20px]">sports_esports</span>
+            <span>JOIN THE CLASH</span>
+            <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </button>
+        </div>
+      </section>
+
     </div>
   );
 }
