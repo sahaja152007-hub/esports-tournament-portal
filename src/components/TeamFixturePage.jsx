@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Users, UserPlus, Shield, Plus, Trophy, RefreshCw, 
-  Trash2, AlertCircle, X, Check, Table, ArrowRight
+  Trash2, AlertCircle, X
 } from 'lucide-react';
 import BracketView from './BracketView';
 import RoundRobinView from './RoundRobinView';
@@ -198,7 +198,7 @@ export default function TeamFixturePage() {
       name: newTeam.name.trim(),
       tag: newTeam.tag.trim().toUpperCase(),
       logo: newTeam.logo || '⚡',
-      color: '#ff2a00',
+      color: '#ff5167',
       members: []
     };
 
@@ -382,38 +382,38 @@ export default function TeamFixturePage() {
   );
 
   return (
-    <div className="space-y-8 pb-12">
+    <div className="space-y-8 pb-12 w-full">
 
-      {/* Header Bar */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-[#12151e] p-6 rounded-lg border border-slate-800">
+      {/* Stitch Telemetry Header Bar */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-[#1e2024] p-6 clip-chamfer border border-[#282a2e]">
         <div>
-          <span className="text-[11px] font-mono text-[#ff2a00] font-bold uppercase tracking-wider block">
-            CONTROL HUB // NMIMS ESPORTS
+          <span className="font-mono text-xs text-[#e6bcbd] uppercase tracking-widest block">
+            TELEMETRY NODE // TOURNAMENT HUB
           </span>
-          <h1 className="font-display font-black text-2xl sm:text-3xl text-white uppercase mt-1 flex items-center gap-2">
-            <Trophy className="w-6 h-6 text-[#ff2a00]" /> TOURNAMENT FIXTURES & ROSTERS
+          <h1 className="font-display font-black text-2xl sm:text-3xl text-[#e2e2e8] uppercase mt-1 flex items-center gap-2">
+            <Trophy className="w-6 h-6 text-[#ff5167]" /> TEAMS &amp; FIXTURES
           </h1>
         </div>
 
         {/* Header Primary Actions */}
-        <div className="flex flex-wrap items-center gap-2.5 w-full sm:w-auto font-display text-xs">
+        <div className="flex flex-wrap items-center gap-2.5 w-full sm:w-auto font-mono text-xs">
           <button 
             onClick={() => { setFormError(''); setIsAddTeamModalOpen(true); }}
-            className="px-4 py-2.5 rounded bg-[#ff2a00] hover:bg-[#e02500] text-black font-black uppercase tracking-wider flex items-center gap-1.5 transition"
+            className="px-4 py-2.5 bg-[#ff5167] hover:bg-[#00e3fd] text-[#5b0015] hover:text-[#001f24] font-bold uppercase tracking-wider transition clip-chamfer flex items-center gap-1.5 cursor-pointer"
           >
             <Plus className="w-4 h-4 stroke-[3]" /> Add New Team
           </button>
           
           <button 
             onClick={() => { setFormError(''); setIsAddPlayerModalOpen(true); }}
-            className="px-4 py-2.5 rounded bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold uppercase tracking-wider flex items-center gap-1.5 transition"
+            className="px-4 py-2.5 bg-[#282a2e] hover:bg-[#333539] text-[#bdf4ff] border border-[#333539] font-bold uppercase tracking-wider transition clip-chamfer flex items-center gap-1.5 cursor-pointer"
           >
-            <UserPlus className="w-4 h-4 text-amber-400" /> Add Participant
+            <UserPlus className="w-4 h-4 text-[#00e3fd]" /> Add Participant
           </button>
 
           <button 
             onClick={handleQuickLoadPresets}
-            className="px-3 py-2.5 rounded bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 font-mono text-[11px]"
+            className="px-3 py-2.5 bg-[#282a2e] hover:bg-[#333539] text-[#e2e2e8] border border-[#333539] font-mono text-xs clip-chamfer cursor-pointer"
             title="Load Preset Teams"
           >
             Load 5 Sample Teams
@@ -421,7 +421,7 @@ export default function TeamFixturePage() {
 
           <button 
             onClick={handleReset}
-            className="p-2.5 rounded bg-slate-900 hover:bg-red-950/60 text-slate-400 hover:text-red-400 border border-slate-800 transition"
+            className="p-2.5 bg-[#282a2e] hover:bg-[#93000a] text-[#e2e2e8] hover:text-[#ffdad6] border border-[#333539] transition clip-chamfer cursor-pointer"
             title="Reset All Data"
           >
             <RefreshCw className="w-4 h-4" />
@@ -430,36 +430,36 @@ export default function TeamFixturePage() {
       </div>
 
       {/* Main Tab Switcher */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
-        <div className="flex items-center gap-2 font-display text-xs">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-b border-[#282a2e] pb-4">
+        <div className="flex items-center gap-2 font-mono text-xs">
           <button 
             onClick={() => setActiveTab('fixtures')}
-            className={`px-5 py-2.5 rounded font-bold uppercase tracking-wider transition flex items-center gap-2 ${
-              activeTab === 'fixtures' ? 'bg-[#ff2a00] text-black font-black' : 'bg-[#12151e] text-slate-400 border border-slate-800 hover:text-white'
+            className={`px-5 py-2.5 font-bold uppercase tracking-wider transition clip-chamfer ${
+              activeTab === 'fixtures' ? 'bg-[#ff5167] text-[#5b0015]' : 'bg-[#1e2024] text-[#e6bcbd] border border-[#282a2e] hover:text-[#e2e2e8]'
             }`}
           >
-            <Trophy className="w-4 h-4" /> 01 // Tournament Fixtures ({matches.length})
+            <Trophy className="w-4 h-4 inline-block mr-1.5" /> 01 // Tournament Fixtures ({matches.length})
           </button>
           <button 
             onClick={() => setActiveTab('teams')}
-            className={`px-5 py-2.5 rounded font-bold uppercase tracking-wider transition flex items-center gap-2 ${
-              activeTab === 'teams' ? 'bg-[#ff2a00] text-black font-black' : 'bg-[#12151e] text-slate-400 border border-slate-800 hover:text-white'
+            className={`px-5 py-2.5 font-bold uppercase tracking-wider transition clip-chamfer ${
+              activeTab === 'teams' ? 'bg-[#ff5167] text-[#5b0015]' : 'bg-[#1e2024] text-[#e6bcbd] border border-[#282a2e] hover:text-[#e2e2e8]'
             }`}
           >
-            <Users className="w-4 h-4" /> 02 // Teams & Rosters ({teams.length})
+            <Users className="w-4 h-4 inline-block mr-1.5" /> 02 // Teams &amp; Rosters ({teams.length})
           </button>
         </div>
 
         {/* Fixture Format Selector */}
         {activeTab === 'fixtures' && (
-          <div className="flex items-center gap-1 bg-[#12151e] p-1 rounded border border-slate-800 font-mono text-xs">
+          <div className="flex items-center gap-1 bg-[#1e2024] p-1 clip-chamfer border border-[#282a2e] font-mono text-xs">
             <button 
               onClick={() => {
                 setFixtureFormat('single');
                 generateFixtures(teams, 'single');
               }}
               className={`px-3 py-1.5 rounded transition ${
-                fixtureFormat === 'single' ? 'bg-slate-900 text-[#ff2a00] font-bold border border-slate-700' : 'text-slate-400 hover:text-white'
+                fixtureFormat === 'single' ? 'bg-[#111318] text-[#00e3fd] font-bold border border-[#282a2e]' : 'text-[#e6bcbd] hover:text-[#e2e2e8]'
               }`}
             >
               Knockout Bracket
@@ -470,7 +470,7 @@ export default function TeamFixturePage() {
                 generateFixtures(teams, 'roundrobin');
               }}
               className={`px-3 py-1.5 rounded transition ${
-                fixtureFormat === 'roundrobin' ? 'bg-slate-900 text-[#ff2a00] font-bold border border-slate-700' : 'text-slate-400 hover:text-white'
+                fixtureFormat === 'roundrobin' ? 'bg-[#111318] text-[#00e3fd] font-bold border border-[#282a2e]' : 'text-[#e6bcbd] hover:text-[#e2e2e8]'
               }`}
             >
               Round-Robin League
@@ -483,13 +483,13 @@ export default function TeamFixturePage() {
       {activeTab === 'fixtures' && (
         <div>
           {matches.length === 0 ? (
-            <div className="text-center py-12 p-6 rounded bg-[#12151e] border border-slate-800 space-y-3">
-              <Trophy className="w-10 h-10 text-slate-600 mx-auto" />
-              <h3 className="font-display font-bold text-base text-slate-300">No Tournament Fixtures Generated</h3>
-              <p className="text-xs text-slate-400 font-mono">Add teams or click Load 5 Sample Teams to create tournament fixtures.</p>
+            <div className="text-center py-12 p-6 bg-[#1e2024] clip-chamfer border border-[#282a2e] space-y-3">
+              <Trophy className="w-10 h-10 text-[#5d3f40] mx-auto" />
+              <h3 className="font-display font-bold text-base text-[#e2e2e8]">No Tournament Fixtures Generated</h3>
+              <p className="text-xs text-[#e6bcbd] font-mono">Add teams or click Load 5 Sample Teams to create tournament fixtures.</p>
               <button 
                 onClick={handleQuickLoadPresets}
-                className="px-5 py-2.5 rounded bg-[#ff2a00] text-black font-display font-black text-xs uppercase tracking-wider"
+                className="px-5 py-2.5 bg-[#ff5167] text-[#5b0015] font-mono text-xs uppercase tracking-wider font-bold clip-chamfer cursor-pointer"
               >
                 Load Sample Teams
               </button>
@@ -522,41 +522,41 @@ export default function TeamFixturePage() {
           
           {/* SECTION 1: TEAMS LIST */}
           <div className="space-y-4">
-            <div className="flex justify-between items-center border-b border-slate-800 pb-3">
+            <div className="flex justify-between items-center border-b border-[#282a2e] pb-3">
               <div>
-                <span className="text-[10px] font-mono text-[#ff2a00] uppercase font-bold tracking-widest block">
-                  SECTION A
+                <span className="text-xs font-mono text-[#ff5167] uppercase font-bold tracking-widest block">
+                  MODULE A
                 </span>
-                <h2 className="font-display font-black text-xl text-white uppercase flex items-center gap-2 mt-0.5">
-                  <Shield className="w-5 h-5 text-[#ff2a00]" /> REGISTERED SQUADS ({teams.length})
+                <h2 className="font-display font-black text-xl text-[#e2e2e8] uppercase flex items-center gap-2 mt-0.5">
+                  <Shield className="w-5 h-5 text-[#ff5167]" /> REGISTERED SQUADS ({teams.length})
                 </h2>
               </div>
               <button 
                 onClick={() => { setFormError(''); setIsAddTeamModalOpen(true); }}
-                className="px-3.5 py-2 rounded bg-[#ff2a00] hover:bg-[#e02500] text-black font-display font-bold text-xs uppercase tracking-wider flex items-center gap-1 transition"
+                className="px-4 py-2 bg-[#ff5167] hover:bg-[#00e3fd] text-[#5b0015] hover:text-[#001f24] font-mono font-bold text-xs uppercase tracking-wider flex items-center gap-1 transition clip-chamfer cursor-pointer"
               >
                 <Plus className="w-4 h-4 stroke-[3]" /> Add Team
               </button>
             </div>
 
             {teams.length === 0 ? (
-              <div className="p-8 rounded bg-[#12151e] border border-slate-800 text-center text-slate-400 font-mono text-xs">
+              <div className="p-8 bg-[#1e2024] clip-chamfer border border-[#282a2e] text-center text-[#e6bcbd] font-mono text-xs">
                 No teams registered yet. Click <strong>+ Add Team</strong> above to create a team.
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {teams.map(team => (
-                  <div key={team.id} className="rounded bg-[#12151e] border border-slate-800 p-5 space-y-4 relative">
+                  <div key={team.id} className="bg-[#1e2024] clip-chamfer border border-[#282a2e] p-5 space-y-4 relative">
                     
                     {/* Team Pass Header */}
-                    <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <div className="flex items-center justify-between border-b border-[#282a2e] pb-3">
                       <div className="flex items-center gap-3">
-                        <span className="text-2xl p-2 rounded bg-[#08090c] border border-slate-800">
+                        <span className="text-2xl p-2 rounded bg-[#111318] border border-[#282a2e]">
                           {team.logo}
                         </span>
                         <div>
-                          <h3 className="font-display font-bold text-base text-white">{team.name}</h3>
-                          <span className="text-xs font-mono text-[#ff2a00]">
+                          <h3 className="font-display font-bold text-base text-[#e2e2e8]">{team.name}</h3>
+                          <span className="text-xs font-mono text-[#ff5167]">
                             [{team.tag}] • {team.members.length} Members
                           </span>
                         </div>
@@ -564,7 +564,7 @@ export default function TeamFixturePage() {
 
                       <button 
                         onClick={() => handleDeleteTeam(team.id)}
-                        className="text-slate-500 hover:text-red-400 p-1 transition"
+                        className="text-[#e6bcbd] hover:text-[#ffb4ab] p-1 transition cursor-pointer"
                         title="Delete Team"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -573,25 +573,25 @@ export default function TeamFixturePage() {
 
                     {/* Team Members List */}
                     <div className="space-y-2 font-mono text-xs">
-                      <span className="text-[10px] text-slate-500 uppercase tracking-wider block font-bold">ROSTER MEMBERS:</span>
+                      <span className="text-[10px] text-[#e6bcbd] uppercase tracking-wider block font-bold">ROSTER MEMBERS:</span>
                       {team.members.length === 0 ? (
-                        <div className="text-xs text-slate-500 italic p-2 border border-dashed border-slate-800 rounded text-center">
+                        <div className="text-xs text-[#e6bcbd]/60 italic p-2 border border-dashed border-[#282a2e] rounded text-center">
                           No participants added yet.
                         </div>
                       ) : (
                         team.members.map(m => (
-                          <div key={m.id} className="flex justify-between items-center p-2 rounded bg-[#08090c] border border-slate-800/80">
+                          <div key={m.id} className="flex justify-between items-center p-2 bg-[#111318] border border-[#282a2e] clip-chamfer">
                             <div>
-                              <div className="font-semibold text-slate-200">{m.name}</div>
-                              <div className="text-[10px] text-slate-500">{m.tag}</div>
+                              <div className="font-semibold text-[#e2e2e8]">{m.name}</div>
+                              <div className="text-[10px] text-[#e6bcbd]">{m.tag}</div>
                             </div>
                             <div className="flex items-center gap-2">
-                              <span className="px-2 py-0.5 rounded text-[10px] bg-slate-900 text-amber-400 font-bold border border-slate-800">
+                              <span className="px-2 py-0.5 rounded text-[10px] bg-[#1e2024] text-[#bdf4ff] font-bold border border-[#282a2e]">
                                 {m.role}
                               </span>
                               <button 
                                 onClick={() => handleDeletePlayer(team.id, m.id)}
-                                className="text-slate-500 hover:text-red-400 px-1 font-bold text-sm"
+                                className="text-[#e6bcbd] hover:text-[#ffb4ab] px-1 font-bold text-sm cursor-pointer"
                                 title="Remove participant"
                               >
                                 ×
@@ -610,60 +610,60 @@ export default function TeamFixturePage() {
 
           {/* SECTION 2: PARTICIPANTS TABLE */}
           <div className="space-y-4">
-            <div className="flex justify-between items-center border-b border-slate-800 pb-3">
+            <div className="flex justify-between items-center border-b border-[#282a2e] pb-3">
               <div>
-                <span className="text-[10px] font-mono text-[#ff2a00] uppercase font-bold tracking-widest block">
-                  SECTION B
+                <span className="text-xs font-mono text-[#ff5167] uppercase font-bold tracking-widest block">
+                  MODULE B
                 </span>
-                <h2 className="font-display font-black text-xl text-white uppercase flex items-center gap-2 mt-0.5">
-                  <Users className="w-5 h-5 text-amber-400" /> PARTICIPANTS ROSTER ({allParticipants.length})
+                <h2 className="font-display font-black text-xl text-[#e2e2e8] uppercase flex items-center gap-2 mt-0.5">
+                  <Users className="w-5 h-5 text-[#bdf4ff]" /> PARTICIPANTS ROSTER ({allParticipants.length})
                 </h2>
               </div>
               <button 
                 onClick={() => { setFormError(''); setIsAddPlayerModalOpen(true); }}
-                className="px-3.5 py-2 rounded bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-display font-bold text-xs uppercase tracking-wider flex items-center gap-1 transition"
+                className="px-4 py-2 bg-[#282a2e] hover:bg-[#333539] text-[#bdf4ff] border border-[#333539] font-mono font-bold text-xs uppercase tracking-wider flex items-center gap-1 transition clip-chamfer cursor-pointer"
               >
-                <UserPlus className="w-4 h-4 text-amber-400" /> Add Participant
+                <UserPlus className="w-4 h-4 text-[#00e3fd]" /> Add Participant
               </button>
             </div>
 
-            <div className="overflow-x-auto rounded border border-slate-800 bg-[#12151e]">
+            <div className="overflow-x-auto bg-[#1e2024] clip-chamfer border border-[#282a2e]">
               <table className="w-full text-left text-xs font-mono">
                 <thead>
-                  <tr className="border-b border-slate-800 bg-[#08090c] text-slate-400 uppercase text-[10px] font-bold">
-                    <th className="py-3 px-4">#</th>
-                    <th className="py-3 px-4">Participant Name</th>
-                    <th className="py-3 px-4">Gamer Tag</th>
-                    <th className="py-3 px-4">Assigned Squad</th>
-                    <th className="py-3 px-4">Role</th>
-                    <th className="py-3 px-4 text-right">Actions</th>
+                  <tr className="border-b border-[#282a2e] bg-[#0c0e12] text-[#e6bcbd] uppercase text-[10px] font-bold">
+                    <th className="py-3 px-4"># INDEX</th>
+                    <th className="py-3 px-4">PARTICIPANT NAME</th>
+                    <th className="py-3 px-4">GAMER TAG</th>
+                    <th className="py-3 px-4">ASSIGNED SQUAD</th>
+                    <th className="py-3 px-4">ROLE</th>
+                    <th className="py-3 px-4 text-right">ACTIONS</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800/80">
+                <tbody className="divide-y divide-[#282a2e]">
                   {allParticipants.length === 0 ? (
                     <tr>
-                      <td colSpan="6" className="py-6 text-center text-slate-500">
+                      <td colSpan="6" className="py-6 text-center text-[#e6bcbd]">
                         No participants added yet. Click <strong>+ Add Participant</strong> to add players.
                       </td>
                     </tr>
                   ) : (
                     allParticipants.map((p, index) => (
-                      <tr key={p.id} className="hover:bg-slate-900/60 transition">
-                        <td className="py-3 px-4 text-slate-500 font-bold">{index + 1}</td>
-                        <td className="py-3 px-4 font-bold text-white font-sans">{p.name}</td>
-                        <td className="py-3 px-4 text-[#ff2a00] font-bold">{p.tag}</td>
-                        <td className="py-3 px-4 text-slate-300">
-                          <span className="mr-1.5">{p.teamLogo}</span> {p.teamName} <span className="text-[10px] text-slate-500">[{p.teamTag}]</span>
+                      <tr key={p.id} className="hover:bg-[#282a2e]/50 transition">
+                        <td className="py-3 px-4 text-[#e6bcbd] font-bold">{index + 1}</td>
+                        <td className="py-3 px-4 font-bold text-[#e2e2e8] font-body">{p.name}</td>
+                        <td className="py-3 px-4 text-[#ff5167] font-bold">{p.tag}</td>
+                        <td className="py-3 px-4 text-[#e2e2e8]">
+                          <span className="mr-1.5">{p.teamLogo}</span> {p.teamName} <span className="text-[10px] text-[#e6bcbd]">[{p.teamTag}]</span>
                         </td>
                         <td className="py-3 px-4">
-                          <span className="px-2 py-0.5 rounded bg-slate-900 text-slate-300 text-[10px] border border-slate-800">
+                          <span className="px-2 py-0.5 rounded bg-[#111318] text-[#bdf4ff] text-[10px] border border-[#282a2e]">
                             {p.role}
                           </span>
                         </td>
                         <td className="py-3 px-4 text-right">
                           <button 
                             onClick={() => handleDeletePlayer(p.teamId, p.id)}
-                            className="text-slate-500 hover:text-red-400 font-bold transition"
+                            className="text-[#e6bcbd] hover:text-[#ffb4ab] font-bold transition cursor-pointer"
                             title="Remove Participant"
                           >
                             Remove
@@ -683,58 +683,58 @@ export default function TeamFixturePage() {
       {/* MODAL 1: ADD NEW TEAM */}
       {isAddTeamModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/85 flex items-center justify-center p-4">
-          <div className="bg-[#12151e] border-2 border-slate-800 rounded max-w-md w-full p-6 space-y-4 relative shadow-2xl">
-            <div className="flex justify-between items-center border-b border-slate-800 pb-3">
-              <h3 className="font-display font-black text-base text-white uppercase flex items-center gap-2">
-                <Shield className="w-5 h-5 text-[#ff2a00]" /> Add New Team
+          <div className="bg-[#1e2024] border-2 border-[#282a2e] clip-chamfer max-w-md w-full p-6 space-y-4 relative shadow-2xl">
+            <div className="flex justify-between items-center border-b border-[#282a2e] pb-3">
+              <h3 className="font-display font-bold text-base text-[#e2e2e8] uppercase flex items-center gap-2">
+                <Shield className="w-5 h-5 text-[#ff5167]" /> Add New Team
               </h3>
               <button 
                 onClick={() => setIsAddTeamModalOpen(false)}
-                className="text-slate-400 hover:text-white p-1"
+                className="text-[#e6bcbd] hover:text-[#e2e2e8] p-1 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {formError && (
-              <div className="p-3 rounded bg-red-950/80 border border-red-800 text-red-200 text-xs font-mono flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 shrink-0 text-red-400" /> {formError}
+              <div className="p-3 rounded bg-[#93000a]/80 border border-[#ffb4ab]/40 text-[#ffdad6] text-xs font-mono flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0 text-[#ffb4ab]" /> {formError}
               </div>
             )}
 
             <form onSubmit={handleCreateTeamSubmit} className="space-y-4 text-xs font-mono">
               <div>
-                <label className="block text-slate-300 font-bold uppercase mb-1">Team Name *</label>
+                <label className="block text-[#e2e2e8] font-bold uppercase mb-1">Team Name *</label>
                 <input 
                   type="text" 
                   placeholder="e.g. Cyber Vipers"
                   value={newTeam.name}
                   onChange={(e) => setNewTeam({ ...newTeam, name: e.target.value })}
-                  className="w-full px-3 py-2.5 rounded bg-[#08090c] border border-slate-800 text-white font-sans focus:outline-none focus:border-[#ff2a00]"
+                  className="w-full px-3 py-2.5 rounded bg-[#111318] border border-[#282a2e] text-[#e2e2e8] font-body focus:outline-none focus:border-[#ff5167]"
                   required
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-300 font-bold uppercase mb-1">Team Tag (3-4 Chars) *</label>
+                  <label className="block text-[#e2e2e8] font-bold uppercase mb-1">Team Tag (3-4 Chars) *</label>
                   <input 
                     type="text" 
                     maxLength="4"
                     placeholder="e.g. CVP"
                     value={newTeam.tag}
                     onChange={(e) => setNewTeam({ ...newTeam, tag: e.target.value })}
-                    className="w-full px-3 py-2.5 rounded bg-[#08090c] border border-slate-800 text-white uppercase font-mono focus:outline-none focus:border-[#ff2a00]"
+                    className="w-full px-3 py-2.5 rounded bg-[#111318] border border-[#282a2e] text-[#e2e2e8] uppercase font-mono focus:outline-none focus:border-[#ff5167]"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-slate-300 font-bold uppercase mb-1">Emblem Logo</label>
+                  <label className="block text-[#e2e2e8] font-bold uppercase mb-1">Emblem Logo</label>
                   <select 
                     value={newTeam.logo}
                     onChange={(e) => setNewTeam({ ...newTeam, logo: e.target.value })}
-                    className="w-full px-3 py-2.5 rounded bg-[#08090c] border border-slate-800 text-white focus:outline-none focus:border-[#ff2a00]"
+                    className="w-full px-3 py-2.5 rounded bg-[#111318] border border-[#282a2e] text-[#e2e2e8] focus:outline-none focus:border-[#ff5167]"
                   >
                     {TEAM_LOGOS.map((logo, i) => (
                       <option key={i} value={logo}>{logo} Emblem {i+1}</option>
@@ -743,17 +743,17 @@ export default function TeamFixturePage() {
                 </div>
               </div>
 
-              <div className="flex justify-end gap-2 pt-3 border-t border-slate-800 font-display">
+              <div className="flex justify-end gap-2 pt-3 border-t border-[#282a2e] font-mono">
                 <button 
                   type="button"
                   onClick={() => setIsAddTeamModalOpen(false)}
-                  className="px-4 py-2 rounded bg-slate-900 hover:bg-slate-800 text-slate-300 font-bold text-xs uppercase"
+                  className="px-4 py-2 bg-[#282a2e] hover:bg-[#333539] text-[#e2e2e8] font-bold text-xs uppercase clip-chamfer cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button 
                   type="submit"
-                  className="px-5 py-2 rounded bg-[#ff2a00] hover:bg-[#e02500] text-black font-black text-xs uppercase tracking-wider"
+                  className="px-5 py-2 bg-[#ff5167] hover:bg-[#00e3fd] text-[#5b0015] hover:text-[#001f24] font-bold text-xs uppercase tracking-wider clip-chamfer cursor-pointer"
                 >
                   Save Team
                 </button>
@@ -766,32 +766,32 @@ export default function TeamFixturePage() {
       {/* MODAL 2: ADD PARTICIPANT */}
       {isAddPlayerModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/85 flex items-center justify-center p-4">
-          <div className="bg-[#12151e] border-2 border-slate-800 rounded max-w-md w-full p-6 space-y-4 relative shadow-2xl">
-            <div className="flex justify-between items-center border-b border-slate-800 pb-3">
-              <h3 className="font-display font-black text-base text-white uppercase flex items-center gap-2">
-                <UserPlus className="w-5 h-5 text-amber-400" /> Add Participant
+          <div className="bg-[#1e2024] border-2 border-[#282a2e] clip-chamfer max-w-md w-full p-6 space-y-4 relative shadow-2xl">
+            <div className="flex justify-between items-center border-b border-[#282a2e] pb-3">
+              <h3 className="font-display font-bold text-base text-[#e2e2e8] uppercase flex items-center gap-2">
+                <UserPlus className="w-5 h-5 text-[#00e3fd]" /> Add Participant
               </h3>
               <button 
                 onClick={() => setIsAddPlayerModalOpen(false)}
-                className="text-slate-400 hover:text-white p-1"
+                className="text-[#e6bcbd] hover:text-[#e2e2e8] p-1 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {formError && (
-              <div className="p-3 rounded bg-red-950/80 border border-red-800 text-red-200 text-xs font-mono flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 shrink-0 text-red-400" /> {formError}
+              <div className="p-3 rounded bg-[#93000a]/80 border border-[#ffb4ab]/40 text-[#ffdad6] text-xs font-mono flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0 text-[#ffb4ab]" /> {formError}
               </div>
             )}
 
             <form onSubmit={handleAddPlayerSubmit} className="space-y-4 text-xs font-mono">
               <div>
-                <label className="block text-slate-300 font-bold uppercase mb-1">Select Squad *</label>
+                <label className="block text-[#e2e2e8] font-bold uppercase mb-1">Select Squad *</label>
                 <select 
                   value={newPlayer.teamId}
                   onChange={(e) => setNewPlayer({ ...newPlayer, teamId: e.target.value })}
-                  className="w-full px-3 py-2.5 rounded bg-[#08090c] border border-slate-800 text-white focus:outline-none focus:border-[#ff2a00]"
+                  className="w-full px-3 py-2.5 rounded bg-[#111318] border border-[#282a2e] text-[#e2e2e8] focus:outline-none focus:border-[#ff5167]"
                   required
                 >
                   <option value="">Select a team...</option>
@@ -802,36 +802,36 @@ export default function TeamFixturePage() {
               </div>
 
               <div>
-                <label className="block text-slate-300 font-bold uppercase mb-1">Participant Full Name *</label>
+                <label className="block text-[#e2e2e8] font-bold uppercase mb-1">Participant Full Name *</label>
                 <input 
                   type="text" 
                   placeholder="e.g. Alex Mercer"
                   value={newPlayer.name}
                   onChange={(e) => setNewPlayer({ ...newPlayer, name: e.target.value })}
-                  className="w-full px-3 py-2.5 rounded bg-[#08090c] border border-slate-800 text-white font-sans focus:outline-none focus:border-[#ff2a00]"
+                  className="w-full px-3 py-2.5 rounded bg-[#111318] border border-[#282a2e] text-[#e2e2e8] font-body focus:outline-none focus:border-[#ff5167]"
                   required
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-300 font-bold uppercase mb-1">Gamer Tag / ID *</label>
+                  <label className="block text-[#e2e2e8] font-bold uppercase mb-1">Gamer Tag / ID *</label>
                   <input 
                     type="text" 
                     placeholder="e.g. Kage#001"
                     value={newPlayer.tag}
                     onChange={(e) => setNewPlayer({ ...newPlayer, tag: e.target.value })}
-                    className="w-full px-3 py-2.5 rounded bg-[#08090c] border border-slate-800 text-white font-mono focus:outline-none focus:border-[#ff2a00]"
+                    className="w-full px-3 py-2.5 rounded bg-[#111318] border border-[#282a2e] text-[#e2e2e8] font-mono focus:outline-none focus:border-[#ff5167]"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-slate-300 font-bold uppercase mb-1">Role</label>
+                  <label className="block text-[#e2e2e8] font-bold uppercase mb-1">Role</label>
                   <select 
                     value={newPlayer.role}
                     onChange={(e) => setNewPlayer({ ...newPlayer, role: e.target.value })}
-                    className="w-full px-3 py-2.5 rounded bg-[#08090c] border border-slate-800 text-white focus:outline-none focus:border-[#ff2a00]"
+                    className="w-full px-3 py-2.5 rounded bg-[#111318] border border-[#282a2e] text-[#e2e2e8] focus:outline-none focus:border-[#ff5167]"
                   >
                     {PLAYER_ROLES.map(r => (
                       <option key={r} value={r}>{r}</option>
@@ -840,17 +840,17 @@ export default function TeamFixturePage() {
                 </div>
               </div>
 
-              <div className="flex justify-end gap-2 pt-3 border-t border-slate-800 font-display">
+              <div className="flex justify-end gap-2 pt-3 border-t border-[#282a2e] font-mono">
                 <button 
                   type="button"
                   onClick={() => setIsAddPlayerModalOpen(false)}
-                  className="px-4 py-2 rounded bg-slate-900 hover:bg-slate-800 text-slate-300 font-bold text-xs uppercase"
+                  className="px-4 py-2 bg-[#282a2e] hover:bg-[#333539] text-[#e2e2e8] font-bold text-xs uppercase clip-chamfer cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button 
                   type="submit"
-                  className="px-5 py-2 rounded bg-[#ff2a00] hover:bg-[#e02500] text-black font-black text-xs uppercase tracking-wider"
+                  className="px-5 py-2 bg-[#ff5167] hover:bg-[#00e3fd] text-[#5b0015] hover:text-[#001f24] font-bold text-xs uppercase tracking-wider clip-chamfer cursor-pointer"
                 >
                   Save Participant
                 </button>
