@@ -10,14 +10,21 @@ import {
   INITIAL_PRESET_TEAMS, TEAM_LOGOS, PLAYER_ROLES 
 } from '../utils/sampleData';
 
-export default function TeamFixturePage() {
+export default function TeamFixturePage({ initialTab = 'fixtures' }) {
   // State initialization with localStorage persistence
   const [teams, setTeams] = useState(() => {
     const saved = localStorage.getItem('nexus_teams');
     return saved ? JSON.parse(saved) : INITIAL_PRESET_TEAMS;
   });
 
-  const [activeTab, setActiveTab] = useState('fixtures'); // 'fixtures' | 'teams'
+  const [activeTab, setActiveTab] = useState(initialTab); // 'fixtures' | 'teams'
+
+  useEffect(() => {
+    if (initialTab) {
+      setActiveTab(initialTab);
+    }
+  }, [initialTab]);
+
   const [fixtureFormat, setFixtureFormat] = useState('single'); // 'single' | 'roundrobin'
   const [matches, setMatches] = useState(() => {
     const saved = localStorage.getItem('nexus_matches');

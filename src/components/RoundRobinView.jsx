@@ -144,22 +144,22 @@ export default function RoundRobinView({ matches, teams, onSelectMatch, onSimula
           </div>
 
           {/* Status Filter Buttons */}
-          <div className="flex items-center justify-between sm:justify-start gap-1 bg-[#111318] p-1 clip-chamfer border border-[#282a2e] font-mono text-xs w-full sm:w-auto">
+          <div className="flex flex-wrap sm:flex-nowrap items-center justify-start gap-1.5 bg-[#111318] p-1.5 clip-chamfer border border-[#282a2e] font-mono text-xs w-full sm:w-auto max-w-full min-w-fit">
             <button 
               onClick={() => setFilter('all')}
-              className={`flex-1 sm:flex-none px-3 py-1.5 rounded transition text-center ${filter === 'all' ? 'bg-[#ff5167] text-[#5b0015] font-bold' : 'text-[#e6bcbd] hover:text-[#e2e2e8]'}`}
+              className={`btn-tactile px-3 py-1.5 rounded transition text-center whitespace-nowrap shrink-0 flex-1 sm:flex-initial ${filter === 'all' ? 'bg-[#ff5167] text-[#5b0015] font-bold' : 'text-[#e6bcbd] hover:text-[#e2e2e8]'}`}
             >
               All ({matches.length})
             </button>
             <button 
               onClick={() => setFilter('upcoming')}
-              className={`flex-1 sm:flex-none px-3 py-1.5 rounded transition text-center ${filter === 'upcoming' ? 'bg-[#ff5167] text-[#5b0015] font-bold' : 'text-[#e6bcbd] hover:text-[#e2e2e8]'}`}
+              className={`btn-tactile px-3 py-1.5 rounded transition text-center whitespace-nowrap shrink-0 flex-1 sm:flex-initial ${filter === 'upcoming' ? 'bg-[#ff5167] text-[#5b0015] font-bold' : 'text-[#e6bcbd] hover:text-[#e2e2e8]'}`}
             >
               Upcoming ({matches.filter(m => m.status === 'UPCOMING').length})
             </button>
             <button 
               onClick={() => setFilter('completed')}
-              className={`flex-1 sm:flex-none px-3 py-1.5 rounded transition text-center ${filter === 'completed' ? 'bg-[#ff5167] text-[#5b0015] font-bold' : 'text-[#e6bcbd] hover:text-[#e2e2e8]'}`}
+              className={`btn-tactile px-3 py-1.5 rounded transition text-center whitespace-nowrap shrink-0 flex-1 sm:flex-initial ${filter === 'completed' ? 'bg-[#ff5167] text-[#5b0015] font-bold' : 'text-[#e6bcbd] hover:text-[#e2e2e8]'}`}
             >
               Completed ({matches.filter(m => m.status === 'COMPLETED').length})
             </button>

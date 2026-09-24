@@ -5,11 +5,14 @@ import TeamFixturePage from './components/TeamFixturePage';
 
 export default function App() {
   const [activePage, setActivePage] = useState('home'); // 'home' | 'fixtures'
+  const [initialTab, setInitialTab] = useState('fixtures'); // 'fixtures' | 'teams'
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const handleNavClick = (page) => {
+  const handleNavClick = (page, targetTab = 'fixtures') => {
     setActivePage(page);
+    setInitialTab(targetTab);
     setMobileMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -96,9 +99,9 @@ export default function App() {
       {/* Main Container */}
       <main className="flex-1 w-full max-w-6xl mx-auto px-4 md:px-12 flex flex-col justify-center py-10 lg:py-16">
         {activePage === 'home' ? (
-          <HomePage onNavigateToFixtures={() => handleNavClick('fixtures')} />
+          <HomePage onNavigateToFixtures={(targetTab) => handleNavClick('fixtures', targetTab || 'fixtures')} />
         ) : (
-          <TeamFixturePage />
+          <TeamFixturePage initialTab={initialTab} />
         )}
       </main>
 

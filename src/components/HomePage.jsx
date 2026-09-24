@@ -82,7 +82,7 @@ export default function HomePage({ onNavigateToFixtures }) {
           {/* Stat 1: Prize Pool */}
           <div className="card-cyber p-6 bg-[#1e2024] shadow-md flex flex-col items-center text-center gap-1 clip-chamfer border border-[#282a2e] hover:border-[#ff5167]/60">
             <span className="font-mono text-xs text-[#e6bcbd] uppercase tracking-widest">PRIZE POOL</span>
-            <span className="font-display text-3xl sm:text-4xl text-[#ff5167] font-bold leading-none mt-1">₹5,00,000</span>
+            <span className="font-display text-3xl sm:text-4xl text-[#ff5167] font-bold leading-none mt-1">₹50,000</span>
           </div>
 
           {/* Stat 2: Format */}
@@ -150,6 +150,34 @@ export default function HomePage({ onNavigateToFixtures }) {
         </div>
       </section>
 
+      {/* NEW SECTION: Tournament Results & Standings Teaser */}
+      <section className="w-full max-w-4xl mx-auto reveal-on-scroll card-cyber relative p-8 md:p-10 bg-[#1e2024] border border-[#282a2e] clip-chamfer-lg shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden">
+        <div className="corner-bracket absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#00e3fd] opacity-60"></div>
+        
+        <div className="space-y-2 text-center md:text-left">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#111318] border border-[#282a2e] text-xs font-mono text-[#00e3fd] uppercase tracking-widest font-bold">
+            <span className="w-2 h-2 rounded-full bg-[#00e3fd] animate-radar"></span>
+            <span>LIVE TOURNAMENT TELEMETRY</span>
+          </div>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-[#e2e2e8] font-black">
+            LEAGUE STANDINGS &amp; <span className="text-[#00e3fd]">MATCH RESULTS</span>
+          </h2>
+          <p className="font-body text-sm sm:text-base text-[#e6bcbd] max-w-xl">
+            Track live match schedules, single-elimination knockout brackets, and real-time campus standings leaderboards.
+          </p>
+        </div>
+
+        <div className="shrink-0">
+          <button
+            onClick={() => onNavigateToFixtures('fixtures')}
+            className="btn-cyber-glow btn-tactile inline-flex items-center gap-2 px-6 py-3 bg-[#282a2e] hover:bg-[#00e3fd] text-[#00e3fd] hover:text-[#001f24] border border-[#333539] hover:border-[#00e3fd] font-mono text-xs sm:text-sm uppercase tracking-wider font-bold clip-chamfer shadow-lg cursor-pointer transition-all duration-200"
+          >
+            <span>VIEW LEAGUE RESULTS</span>
+            <span className="material-symbols-outlined text-[18px]">leaderboard</span>
+          </button>
+        </div>
+      </section>
+
       {/* Collegiate Division Closing CTA Section */}
       <section className="w-full max-w-4xl mx-auto reveal-on-scroll card-cyber relative p-8 md:p-12 bg-[#1e2024] border border-[#282a2e] clip-chamfer-lg shadow-xl flex flex-col items-center text-center gap-6 overflow-hidden">
         <div className="corner-bracket absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#00e3fd] opacity-60"></div>
@@ -170,10 +198,10 @@ export default function HomePage({ onNavigateToFixtures }) {
           Assemble your squad. Battle for collegiate glory.
         </p>
 
-        {/* CTA Button */}
+        {/* CTA Button - Wired to Teams Registration Tab */}
         <div className="pt-2">
           <button
-            onClick={onNavigateToFixtures}
+            onClick={() => onNavigateToFixtures('teams')}
             className="btn-cyber-glow btn-tactile inline-flex items-center gap-2 px-6 py-3 bg-[#ff5167] hover:bg-[#00e3fd] text-[#5b0015] hover:text-[#001f24] font-mono text-sm uppercase tracking-wider font-bold clip-chamfer shadow-lg cursor-pointer transition-all duration-200"
           >
             <span className="material-symbols-outlined text-[20px]">sports_esports</span>
