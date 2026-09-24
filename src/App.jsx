@@ -36,12 +36,12 @@ export default function App() {
           </button>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-8">
             <button 
               onClick={() => handleNavClick('home')}
-              className={`font-mono text-xs uppercase tracking-wider pb-1 transition-colors ${
+              className={`nav-link-animated font-mono text-xs uppercase tracking-wider transition-colors cursor-pointer ${
                 activePage === 'home' 
-                  ? 'text-[#e2e2e8] border-b-2 border-[#ff5167]' 
+                  ? 'text-[#e2e2e8] active-nav' 
                   : 'text-[#e6bcbd] hover:text-[#e2e2e8]'
               }`}
             >
@@ -49,13 +49,13 @@ export default function App() {
             </button>
             <button 
               onClick={() => handleNavClick('fixtures')}
-              className={`font-mono text-xs uppercase tracking-wider pb-1 transition-colors ${
+              className={`nav-link-animated font-mono text-xs uppercase tracking-wider transition-colors cursor-pointer ${
                 activePage === 'fixtures' 
-                  ? 'text-[#e2e2e8] border-b-2 border-[#ff5167]' 
+                  ? 'text-[#e2e2e8] active-nav' 
                   : 'text-[#e6bcbd] hover:text-[#e2e2e8]'
               }`}
             >
-              Teams & Fixtures
+              Teams &amp; Fixtures
             </button>
           </nav>
 
