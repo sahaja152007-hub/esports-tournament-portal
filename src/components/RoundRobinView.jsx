@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Table, Trophy, Play, CheckCircle2, Sparkles, Calendar, Clock, Gamepad2, Filter } from 'lucide-react';
-import { playSound } from '../utils/sound';
+import { Table, Trophy, Play, CheckCircle2, Sparkles } from 'lucide-react';
 
 export default function RoundRobinView({ matches, teams, onSelectMatch, onSimulateMatch, onSimulateAll }) {
   const [filter, setFilter] = useState('all'); // 'all' | 'upcoming' | 'completed'
@@ -65,49 +64,61 @@ export default function RoundRobinView({ matches, teams, onSelectMatch, onSimula
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* Standings Table Section */}
-      <div className="p-4 sm:p-6 rounded-2xl bg-slate-900/80 border border-white/10 cyber-card">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
-          <h3 className="font-orbitron font-bold text-base sm:text-lg text-white flex items-center gap-2">
+      <div className="p-5 rounded-xl bg-slate-900 border border-slate-800 space-y-4">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <h3 className="font-bold text-base sm:text-lg text-white flex items-center gap-2">
             <Trophy className="w-5 h-5 text-amber-400 shrink-0" /> Round-Robin League Standings
           </h3>
           <button 
             onClick={onSimulateAll}
-            className="w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-black font-orbitron font-bold text-xs hover:from-cyan-400 hover:to-blue-500 transition shadow-lg flex items-center gap-2 shrink-0 whitespace-nowrap"
+            className="w-full sm:w-auto justify-center px-4 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-xs transition flex items-center gap-2 shrink-0"
           >
-            <Sparkles className="w-4 h-4 text-black" /> Auto-Simulate League
+            <Sparkles className="w-4 h-4" /> Auto-Simulate League
           </button>
         </div>
 
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto rounded-lg border border-slate-800">
           <table className="w-full text-left text-xs font-mono">
             <thead>
-              <tr className="border-b border-white/10 text-slate-400 uppercase font-orbitron">
-                <th className="py-3 px-4">Rank</th>
-                <th className="py-3 px-4">Full Team Name</th>
-                <th className="py-3 px-4 text-center">Played</th>
-                <th className="py-3 px-4 text-center">Wins</th>
-                <th className="py-3 px-4 text-center">Losses</th>
-                <th className="py-3 px-4 text-center">Diff</th>
-                <th className="py-3 px-4 text-right font-bold text-cyan-400">Points</th>
+              <tr className="border-b border-slate-800 bg-slate-950 text-slate-400 uppercase text-[11px]">
+                <th className="py-3 px-3">#</th>
+                <th className="py-3 px-4">Team</th>
+                <th className="py-3 px-3 text-center">Played</th>
+                <th className="py-3 px-3 text-center">Wins</th>
+                <th className="py-3 px-3 text-center">Losses</th>
+                <th className="py-3 px-3 text-center">Diff</th>
+                <th className="py-3 px-4 text-right">Points</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5">
-              {standings.map((item, idx) => (
-                <tr key={item.team.id} className={`hover:bg-white/5 transition ${idx === 0 ? 'bg-amber-500/10' : ''}`}>
-                  <td className="py-3.5 px-4 font-bold">
-                    {idx === 0 ? <span className="text-amber-400">🥇 1st</span> : `#${idx + 1}`}
+            <tbody className="divide-y divide-slate-800/60">
+              {standings.map((item, index) => (
+                <tr 
+                  key={item.team.id}
+                  className={`transition hover:bg-slate-800/40 ${
+                    index === 0 ? 'bg-amber-950/20 font-bold' : ''
+                  }`}
+                >
+                  <td className="py-3 px-3">
+                    {index === 0 ? (
+                      <span className="text-amber-400 font-bold">🥇 1</span>
+                    ) : (
+                      <span className="text-slate-400 px-1">{index + 1}</span>
+                    )}
                   </td>
-                  <td className="py-3.5 px-4 font-orbitron font-bold text-white flex items-center gap-2.5">
-                    <span className="text-xl p-1 rounded-lg bg-black/40 border border-white/10">{item.team.logo}</span>
-                    <span className="text-sm font-bold">{item.team.name}</span>
+                  <td className="py-3 px-4 font-semibold text-white flex items-center gap-2">
+                    <span className="text-lg">{item.team.logo}</span>
+                    <span>{item.team.name}</span>
+                    <span className="text-[10px] text-slate-400 font-mono">[{item.team.tag}]</span>
                   </td>
-                  <td className="py-3.5 px-4 text-center text-slate-300 font-bold">{item.played}</td>
-                  <td className="py-3.5 px-4 text-center text-emerald-400 font-bold">{item.wins}</td>
-                  <td className="py-3.5 px-4 text-center text-pink-400 font-bold">{item.losses}</td>
-                  <td className="py-3.5 px-4 text-center text-slate-400">{item.diff > 0 ? `+${item.diff}` : item.diff}</td>
-                  <td className="py-3.5 px-4 text-right font-bold text-cyan-300 text-base">{item.points} PTS</td>
+                  <td className="py-3 px-3 text-center text-slate-300">{item.played}</td>
+                  <td className="py-3 px-3 text-center text-emerald-400 font-bold">{item.wins}</td>
+                  <td className="py-3 px-3 text-center text-red-400 font-bold">{item.losses}</td>
+                  <td className={`py-3 px-3 text-center font-bold ${item.diff > 0 ? 'text-emerald-400' : (item.diff < 0 ? 'text-red-400' : 'text-slate-400')}`}>
+                    {item.diff > 0 ? `+${item.diff}` : item.diff}
+                  </td>
+                  <td className="py-3 px-4 text-right font-bold text-cyan-400 text-sm">{item.points} PTS</td>
                 </tr>
               ))}
             </tbody>
@@ -117,28 +128,28 @@ export default function RoundRobinView({ matches, teams, onSelectMatch, onSimula
 
       {/* Fixtures Schedule Section */}
       <div className="space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-slate-900/80 border border-white/10 cyber-card">
-          <h3 className="font-orbitron font-bold text-base sm:text-lg text-white flex items-center gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-slate-900 border border-slate-800">
+          <h3 className="font-bold text-base text-white flex items-center gap-2">
             <Table className="w-5 h-5 text-cyan-400 shrink-0" /> League Fixtures ({matches.length} Matches)
           </h3>
 
           {/* Status Filter Buttons */}
-          <div className="flex items-center justify-between sm:justify-start gap-1 bg-black/50 p-1 rounded-xl border border-white/10 text-[11px] sm:text-xs font-orbitron w-full sm:w-auto">
+          <div className="flex items-center justify-between sm:justify-start gap-1 bg-slate-950 p-1 rounded-lg border border-slate-800 text-xs font-medium w-full sm:w-auto">
             <button 
               onClick={() => setFilter('all')}
-              className={`flex-1 sm:flex-none px-2.5 py-1.5 rounded-lg transition font-bold text-center ${filter === 'all' ? 'bg-cyan-500 text-black shadow' : 'text-slate-400 hover:text-white'}`}
+              className={`flex-1 sm:flex-none px-3 py-1.5 rounded-md transition text-center ${filter === 'all' ? 'bg-cyan-600 text-white font-semibold' : 'text-slate-400 hover:text-white'}`}
             >
               All ({matches.length})
             </button>
             <button 
               onClick={() => setFilter('upcoming')}
-              className={`flex-1 sm:flex-none px-2.5 py-1.5 rounded-lg transition font-bold text-center ${filter === 'upcoming' ? 'bg-cyan-500 text-black shadow' : 'text-slate-400 hover:text-white'}`}
+              className={`flex-1 sm:flex-none px-3 py-1.5 rounded-md transition text-center ${filter === 'upcoming' ? 'bg-cyan-600 text-white font-semibold' : 'text-slate-400 hover:text-white'}`}
             >
               Upcoming ({matches.filter(m => m.status === 'UPCOMING').length})
             </button>
             <button 
               onClick={() => setFilter('completed')}
-              className={`flex-1 sm:flex-none px-2.5 py-1.5 rounded-lg transition font-bold text-center ${filter === 'completed' ? 'bg-cyan-500 text-black shadow' : 'text-slate-400 hover:text-white'}`}
+              className={`flex-1 sm:flex-none px-3 py-1.5 rounded-md transition text-center ${filter === 'completed' ? 'bg-cyan-600 text-white font-semibold' : 'text-slate-400 hover:text-white'}`}
             >
               Completed ({matches.filter(m => m.status === 'COMPLETED').length})
             </button>
@@ -155,34 +166,33 @@ export default function RoundRobinView({ matches, teams, onSelectMatch, onSimula
             return (
               <div 
                 key={match.id}
-                onClick={() => { playSound('click'); onSelectMatch(match); }}
-                className="p-5 rounded-2xl bg-slate-900/80 border border-white/10 hover:border-cyan-500/50 cursor-pointer transition space-y-3.5 cyber-card"
+                onClick={() => onSelectMatch(match)}
+                className="p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 cursor-pointer transition space-y-3"
               >
                 {/* 1. MATCH HEADER */}
-                <div className="flex justify-between items-center text-xs font-mono border-b border-white/10 pb-2.5">
-                  <span className="font-orbitron font-black text-sm text-cyan-300 tracking-wider">
+                <div className="flex justify-between items-center text-xs font-mono border-b border-slate-800 pb-2">
+                  <span className="font-bold text-xs text-cyan-400">
                     {formatMatchName(match.id, match.matchNum, i)}
                   </span>
 
                   <div className="flex items-center gap-2">
                     {match.status === 'COMPLETED' && (
-                      <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono text-[11px] font-bold border border-emerald-500/30 flex items-center gap-1">
+                      <span className="px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-400 font-mono text-[10px] font-semibold border border-emerald-800 flex items-center gap-1">
                         <CheckCircle2 className="w-3 h-3" /> Completed
                       </span>
                     )}
                     {match.status === 'UPCOMING' && (
-                      <span className="px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-mono text-[11px] font-semibold border border-cyan-500/30">
+                      <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono text-[10px]">
                         Upcoming
                       </span>
                     )}
-                    {match.status !== 'COMPLETED' && (
+                    {match.status === 'UPCOMING' && (
                       <button 
                         onClick={(e) => {
                           e.stopPropagation();
-                          playSound('generate');
-                          onSimulateMatch(match.id);
+                          onSimulateMatch(match);
                         }}
-                        className="px-2.5 py-0.5 rounded-lg bg-cyan-500/20 text-cyan-300 hover:bg-cyan-500/40 font-mono text-[11px] font-bold flex items-center gap-1 transition"
+                        className="px-2 py-0.5 rounded bg-cyan-600 hover:bg-cyan-500 text-white font-mono text-[10px] font-bold flex items-center gap-1 transition"
                       >
                         <Play className="w-2.5 h-2.5" /> Sim
                       </button>
@@ -190,68 +200,31 @@ export default function RoundRobinView({ matches, teams, onSelectMatch, onSimula
                   </div>
                 </div>
 
-                {/* 2. MATCHUP: TEAM A VS TEAM B */}
-                <div className="p-3.5 rounded-xl bg-black/50 border border-white/5 space-y-3">
-                  {/* Team A */}
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-3 min-w-0">
-                      <span className="text-2xl shrink-0 p-1 rounded-lg bg-slate-900 border border-white/10">
-                        {match.team1?.logo || '🛡️'}
-                      </span>
-                      <div className="font-orbitron font-bold text-sm text-slate-100 truncate">
-                        {match.team1?.name || 'TBD'}
-                      </div>
-                    </div>
-                    <span className="font-mono text-base font-bold text-white px-2.5 py-0.5 rounded-lg bg-slate-900 border border-white/10 shrink-0">
-                      {match.score1}
+                {/* 2. TEAMS COMPARISON */}
+                <div className="grid grid-cols-7 items-center text-center py-1 bg-slate-950 p-3 rounded-lg border border-slate-800">
+                  <div className="col-span-3 flex items-center gap-2 justify-start min-w-0">
+                    <span className="text-xl shrink-0">{match.team1?.logo || '🛡️'}</span>
+                    <span className={`font-semibold text-xs sm:text-sm truncate ${isTeam1Winner ? 'text-cyan-400 font-bold' : 'text-slate-200'}`}>
+                      {match.team1?.name || 'TBD'}
                     </span>
                   </div>
 
-                  {/* VS Divider */}
-                  <div className="flex items-center justify-center gap-2 my-1">
-                    <div className="h-px bg-white/10 flex-1"></div>
-                    <span className="px-2 py-0.5 rounded bg-cyan-950 text-cyan-400 font-orbitron font-black text-[10px] tracking-widest border border-cyan-500/30">
-                      VS
-                    </span>
-                    <div className="h-px bg-white/10 flex-1"></div>
+                  <div className="col-span-1 flex items-center justify-center font-mono font-bold text-sm text-cyan-400 bg-slate-900 py-1 px-2 rounded border border-slate-800">
+                    {match.score1}:{match.score2}
                   </div>
 
-                  {/* Team B */}
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-3 min-w-0">
-                      <span className="text-2xl shrink-0 p-1 rounded-lg bg-slate-900 border border-white/10">
-                        {match.team2?.logo || '⚔️'}
-                      </span>
-                      <div className="font-orbitron font-bold text-sm text-slate-100 truncate">
-                        {match.team2?.name || 'TBD'}
-                      </div>
-                    </div>
-                    <span className="font-mono text-base font-bold text-white px-2.5 py-0.5 rounded-lg bg-slate-900 border border-white/10 shrink-0">
-                      {match.score2}
+                  <div className="col-span-3 flex items-center gap-2 justify-end min-w-0">
+                    <span className={`font-semibold text-xs sm:text-sm truncate ${isTeam2Winner ? 'text-cyan-400 font-bold' : 'text-slate-200'}`}>
+                      {match.team2?.name || 'TBD'}
                     </span>
+                    <span className="text-xl shrink-0">{match.team2?.logo || '⚔️'}</span>
                   </div>
                 </div>
 
-                {/* 3. METADATA: GAME, DATE, TIME */}
-                <div className="grid grid-cols-3 gap-1.5 text-[11px] font-mono text-slate-400 bg-slate-950/60 p-2 rounded-lg border border-white/5 text-center">
-                  <div className="flex flex-col items-center">
-                    <span className="text-[9px] text-slate-500 uppercase">Game</span>
-                    <span className="text-cyan-300 font-semibold truncate max-w-full">🎮 {match.game || 'FIFA 26'}</span>
-                  </div>
-                  <div className="flex flex-col items-center border-x border-white/5">
-                    <span className="text-[9px] text-slate-500 uppercase">Date</span>
-                    <span className="text-slate-200 font-medium">📅 {match.date || '25 Sep 2026'}</span>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <span className="text-[9px] text-slate-500 uppercase">Time</span>
-                    <span className="text-amber-300 font-medium">⏰ {match.time || '6:00 PM'}</span>
-                  </div>
-                </div>
-
-                {/* 4. WINNER BANNER */}
+                {/* 3. WINNER DISPLAY */}
                 {winnerTeam && (
-                  <div className="pt-2 border-t border-white/10 text-center text-xs font-mono text-emerald-400 flex items-center justify-center gap-1.5 font-bold">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" /> Winner: <strong className="text-white font-orbitron">{winnerTeam.name}</strong>
+                  <div className="text-center text-xs text-emerald-400 font-semibold pt-1">
+                    Winner: <strong className="text-white">{winnerTeam.name}</strong>
                   </div>
                 )}
               </div>

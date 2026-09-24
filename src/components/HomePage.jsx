@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Trophy, Swords, Flame, Users, Radio, ChevronRight, Sparkles, Globe } from 'lucide-react';
+import { Trophy, Swords, Shield, Users, Radio, ChevronRight, Globe } from 'lucide-react';
 
 export default function HomePage({ onNavigateToFixtures }) {
   // Countdown state
@@ -20,167 +20,128 @@ export default function HomePage({ onNavigateToFixtures }) {
     fifa: {
       title: 'FIFA',
       subtitle: 'Competitive Football & Ultimate Team Showdown',
-      desc: 'High-speed tactical football matches. Master precision passing, skill moves, tactical formations, and clutch penalty shootouts to dominate the pitch.',
+      desc: 'High-speed tactical football matches. Master precision passing, skill moves, tactical formations, and penalty shootouts to dominate the pitch.',
       icon: '⚽',
-      stats: { teams: '32 Players', map: 'Santiago Bernabéu', mode: 'Knockout / BO3' },
-      accent: 'border-emerald-500 text-emerald-400 bg-emerald-950/20'
+      stats: { teams: '5 Teams / 25 Players', arena: 'Campus Esports Arena', mode: 'Knockout & League' }
     },
     minecraft: {
       title: 'MINECRAFT',
       subtitle: 'BedWars & Survival PvP Challenges',
-      desc: 'Resource management, speed-building, and tactical PvP combat. Squads construct defensive fortresses, manage island economies, and eliminate opposing beds to survive.',
+      desc: 'Resource management, speed-building, and tactical PvP combat. Squads construct defensive fortresses and eliminate opposing beds to survive.',
       icon: '⛏️',
-      stats: { teams: '16 Squads', map: 'Craft Arena', mode: 'BedWars / Survival' },
-      accent: 'border-amber-500 text-amber-400 bg-amber-950/20'
+      stats: { teams: '5 Squads', arena: 'Craft Arena', mode: 'BedWars / Survival' }
     },
     valorant: {
       title: 'VALORANT',
       subtitle: '5v5 Tactical FPS & Agent Abilities',
-      desc: 'Precise gunplay meets hyper-tuned agent utility. Synchronize team entry executes, spike plant defenses, and strategic mid-round calls across 24-round regulation matches.',
+      desc: 'Precise gunplay meets tactical agent utility. Synchronize team entry executes, spike defenses, and mid-round calls across regulation matches.',
       icon: '🎯',
-      stats: { teams: '64 Teams', map: 'Haven / Ascent', mode: 'Best of 3 (BO3)' },
-      accent: 'border-cyan-500 text-cyan-400 bg-cyan-950/20'
+      stats: { teams: '5 Teams', arena: 'Haven / Ascent', mode: 'Best of 3 (BO3)' }
     }
   };
 
   return (
-    <div className="space-y-12 sm:space-y-16 md:space-y-20 pb-12 sm:pb-16 max-w-full overflow-hidden">
+    <div className="space-y-12 pb-12 max-w-full">
 
       {/* Hero Section */}
-      <section className="relative min-h-[65vh] sm:min-h-[75vh] flex items-center justify-center text-center px-2 sm:px-4 overflow-hidden pt-4 sm:pt-8">
-        {/* Background Radial Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[550px] h-[320px] sm:h-[550px] bg-cyan-500/10 rounded-full blur-[90px] sm:blur-[130px] pointer-events-none"></div>
-        <div className="absolute top-1/3 left-1/4 w-[200px] sm:w-[300px] h-[200px] sm:h-[300px] bg-pink-500/10 rounded-full blur-[80px] sm:blur-[110px] pointer-events-none"></div>
+      <section className="text-center py-8 sm:py-12 bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-10 space-y-6">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-950/80 border border-cyan-700/50 text-cyan-300 text-xs font-semibold">
+          <Radio className="w-3.5 h-3.5 text-cyan-400" /> NMIMS Esports Championship 2026
+        </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto space-y-5 sm:space-y-8">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-mono text-[10px] sm:text-xs font-semibold uppercase tracking-widest glow-cyan">
-            <Radio className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-cyan-400 animate-pulse" /> NMIMS 2026
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white uppercase">
+          NMIMS <span className="text-cyan-400">2026</span>
+        </h1>
+
+        <p className="max-w-2xl mx-auto text-sm sm:text-base text-slate-300 leading-relaxed">
+          Official NMIMS College Esports Tournament Portal. Create campus teams, manage 5-player rosters, generate knockout & round-robin fixtures, and follow match results.
+        </p>
+
+        {/* Countdown Timer */}
+        <div className="pt-2 flex justify-center items-center gap-3 sm:gap-5 font-mono">
+          <div className="flex flex-col p-3 rounded-lg bg-slate-950 border border-slate-800 min-w-[70px] sm:min-w-[85px] text-center">
+            <span className="text-2xl sm:text-3xl font-bold text-cyan-400">{String(timeLeft.days).padStart(2, '0')}</span>
+            <span className="text-[10px] text-slate-400 uppercase tracking-wider mt-0.5">Days</span>
           </div>
-
-          {/* Main Title */}
-          <h1 className="font-orbitron font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-white uppercase leading-none">
-            NEXUS <span className="bg-gradient-to-r from-cyan-400 via-pink-500 to-amber-400 bg-clip-text text-transparent">ARENA</span>
-          </h1>
-
-          <p className="max-w-2xl mx-auto text-xs sm:text-base md:text-lg text-slate-300 font-sans leading-relaxed px-2">
-            The ultimate esports tournament hub. Create teams, manage 5-player rosters, generate dynamic knockout fixtures, and follow championship matches.
-          </p>
-
-          {/* Countdown Timer */}
-          <div className="pt-2 pb-2 flex justify-center items-center gap-2 sm:gap-4 md:gap-6 font-orbitron">
-            <div className="flex flex-col p-2.5 sm:p-4 rounded-xl bg-slate-900/80 border border-white/10 min-w-[62px] sm:min-w-[85px] shadow-lg">
-              <span className="text-xl sm:text-3xl md:text-4xl font-bold text-cyan-400 font-mono">{String(timeLeft.days).padStart(2, '0')}</span>
-              <span className="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Days</span>
-            </div>
-            <span className="text-lg sm:text-2xl text-slate-600 font-bold">:</span>
-            <div className="flex flex-col p-2.5 sm:p-4 rounded-xl bg-slate-900/80 border border-white/10 min-w-[62px] sm:min-w-[85px] shadow-lg">
-              <span className="text-xl sm:text-3xl md:text-4xl font-bold text-cyan-400 font-mono">{String(timeLeft.hours).padStart(2, '0')}</span>
-              <span className="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Hours</span>
-            </div>
-            <span className="text-lg sm:text-2xl text-slate-600 font-bold">:</span>
-            <div className="flex flex-col p-2.5 sm:p-4 rounded-xl bg-slate-900/80 border border-white/10 min-w-[62px] sm:min-w-[85px] shadow-lg">
-              <span className="text-xl sm:text-3xl md:text-4xl font-bold text-pink-400 font-mono">{String(timeLeft.minutes).padStart(2, '0')}</span>
-              <span className="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Mins</span>
-            </div>
-            <span className="text-lg sm:text-2xl text-slate-600 font-bold">:</span>
-            <div className="flex flex-col p-2.5 sm:p-4 rounded-xl bg-slate-900/80 border border-white/10 min-w-[62px] sm:min-w-[85px] shadow-lg">
-              <span className="text-xl sm:text-3xl md:text-4xl font-bold text-amber-400 font-mono">{String(timeLeft.seconds).padStart(2, '0')}</span>
-              <span className="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Secs</span>
-            </div>
+          <span className="text-xl text-slate-600 font-bold">:</span>
+          <div className="flex flex-col p-3 rounded-lg bg-slate-950 border border-slate-800 min-w-[70px] sm:min-w-[85px] text-center">
+            <span className="text-2xl sm:text-3xl font-bold text-cyan-400">{String(timeLeft.hours).padStart(2, '0')}</span>
+            <span className="text-[10px] text-slate-400 uppercase tracking-wider mt-0.5">Hours</span>
           </div>
-
-          {/* Action CTA Buttons */}
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 pt-2 w-full max-w-md mx-auto">
-            <button 
-              onClick={onNavigateToFixtures}
-              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-black font-orbitron font-black text-xs sm:text-sm uppercase tracking-wider hover:from-cyan-400 hover:to-blue-500 transition-all transform hover:-translate-y-0.5 shadow-xl glow-cyan flex items-center justify-center gap-2.5 cursor-pointer min-h-[44px]"
-            >
-              <Swords className="w-4 h-4 sm:w-5 sm:h-5 text-black" /> Manage Teams & Fixtures <ChevronRight className="w-4 h-4" />
-            </button>
-            <a 
-              href="#modes"
-              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-slate-900/80 border border-white/15 text-slate-200 hover:text-white hover:border-cyan-500/50 font-orbitron font-bold text-xs sm:text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2 min-h-[44px]"
-            >
-              <Trophy className="w-4 h-4 text-amber-400" /> Explore Game Modes
-            </a>
+          <span className="text-xl text-slate-600 font-bold">:</span>
+          <div className="flex flex-col p-3 rounded-lg bg-slate-950 border border-slate-800 min-w-[70px] sm:min-w-[85px] text-center">
+            <span className="text-2xl sm:text-3xl font-bold text-amber-400">{String(timeLeft.minutes).padStart(2, '0')}</span>
+            <span className="text-[10px] text-slate-400 uppercase tracking-wider mt-0.5">Mins</span>
           </div>
+          <span className="text-xl text-slate-600 font-bold">:</span>
+          <div className="flex flex-col p-3 rounded-lg bg-slate-950 border border-slate-800 min-w-[70px] sm:min-w-[85px] text-center">
+            <span className="text-2xl sm:text-3xl font-bold text-amber-400">{String(timeLeft.seconds).padStart(2, '0')}</span>
+            <span className="text-[10px] text-slate-400 uppercase tracking-wider mt-0.5">Secs</span>
+          </div>
+        </div>
+
+        {/* Action CTA Buttons */}
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-3 pt-2 max-w-md mx-auto">
+          <button 
+            onClick={onNavigateToFixtures}
+            className="w-full sm:w-auto px-6 py-3 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-sm transition flex items-center justify-center gap-2"
+          >
+            <Trophy className="w-4 h-4" /> Teams & Tournament Fixtures <ChevronRight className="w-4 h-4" />
+          </button>
+          <a 
+            href="#modes"
+            className="w-full sm:w-auto px-6 py-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-semibold transition flex items-center justify-center gap-2"
+          >
+            Explore Game Modes
+          </a>
         </div>
       </section>
 
       {/* Prize Pool Showcase Section */}
-      <section className="max-w-6xl mx-auto px-2 sm:px-4">
-        <div className="p-5 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-slate-900/90 via-slate-950 to-slate-900 border border-cyan-500/30 cyber-glass shadow-2xl relative overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-center">
-            <div className="space-y-4 text-left">
-              <span className="text-[10px] sm:text-xs font-mono tracking-widest text-amber-400 uppercase font-bold flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4" /> CHAMPIONSHIP REWARDS
-              </span>
-              <h2 className="font-orbitron font-black text-3xl sm:text-4xl md:text-5xl text-white">
-                ₹1,00,000 <span className="text-cyan-400">PRIZE POOL</span>
-              </h2>
-              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-                Competing teams fight for glory, official tournament trophies, and cash prize distribution across top tier standings.
-              </p>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 pt-2">
-                <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-center">
-                  <div className="text-[10px] sm:text-xs text-amber-300 font-mono">1ST PLACE</div>
-                  <div className="font-orbitron font-bold text-amber-400 text-base sm:text-lg">₹50,000</div>
-                </div>
-                <div className="p-3 rounded-xl bg-slate-400/10 border border-slate-400/30 text-center">
-                  <div className="text-[10px] sm:text-xs text-slate-300 font-mono">2ND PLACE</div>
-                  <div className="font-orbitron font-bold text-slate-200 text-base sm:text-lg">₹30,000</div>
-                </div>
-                <div className="p-3 rounded-xl bg-amber-700/10 border border-amber-700/30 text-center">
-                  <div className="text-[10px] sm:text-xs text-amber-500 font-mono">3RD PLACE</div>
-                  <div className="font-orbitron font-bold text-amber-500 text-base sm:text-lg">₹20,000</div>
-                </div>
-              </div>
-            </div>
+      <section className="max-w-6xl mx-auto">
+        <div className="p-6 sm:p-8 rounded-2xl bg-slate-900 border border-slate-800 space-y-6">
+          <div className="text-center sm:text-left space-y-1">
+            <span className="text-xs text-amber-400 uppercase font-semibold tracking-wider">Tournament Rewards</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">
+              ₹1,00,000 Total Prize Pool
+            </h2>
+            <p className="text-slate-400 text-xs sm:text-sm">
+              Participating teams compete for cash prize distribution and championship trophies.
+            </p>
+          </div>
 
-            {/* Quick Stats Grid */}
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              <div className="p-4 sm:p-6 rounded-2xl bg-slate-900/80 border border-white/10 text-center cyber-card">
-                <Users className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-400 mx-auto mb-1.5 sm:mb-2" />
-                <div className="font-orbitron font-black text-2xl sm:text-3xl text-white">128</div>
-                <div className="text-[10px] sm:text-xs font-mono text-slate-400 uppercase mt-1">Teams Registered</div>
-              </div>
-              <div className="p-4 sm:p-6 rounded-2xl bg-slate-900/80 border border-white/10 text-center cyber-card">
-                <Radio className="w-6 h-6 sm:w-8 sm:h-8 text-pink-400 mx-auto mb-1.5 sm:mb-2" />
-                <div className="font-orbitron font-black text-2xl sm:text-3xl text-white">10K+</div>
-                <div className="text-[10px] sm:text-xs font-mono text-slate-400 uppercase mt-1">Concurrent Viewers</div>
-              </div>
-              <div className="p-4 sm:p-6 rounded-2xl bg-slate-900/80 border border-white/10 text-center cyber-card">
-                <Globe className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-400 mx-auto mb-1.5 sm:mb-2" />
-                <div className="font-orbitron font-black text-2xl sm:text-3xl text-white">5</div>
-                <div className="text-[10px] sm:text-xs font-mono text-slate-400 uppercase mt-1">Campus Regions</div>
-              </div>
-              <div className="p-4 sm:p-6 rounded-2xl bg-slate-900/80 border border-white/10 text-center cyber-card">
-                <Flame className="w-6 h-6 sm:w-8 sm:h-8 text-amber-400 mx-auto mb-1.5 sm:mb-2" />
-                <div className="font-orbitron font-black text-2xl sm:text-3xl text-white">5</div>
-                <div className="text-[10px] sm:text-xs font-mono text-slate-400 uppercase mt-1">Pro Game Arenas</div>
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="p-4 rounded-xl bg-slate-950 border border-amber-500/40 text-center">
+              <div className="text-xs text-amber-400 font-medium uppercase mb-1">🥇 1st Place</div>
+              <div className="text-2xl font-bold text-amber-300">₹50,000</div>
+            </div>
+            <div className="p-4 rounded-xl bg-slate-950 border border-slate-700 text-center">
+              <div className="text-xs text-slate-300 font-medium uppercase mb-1">🥈 2nd Place</div>
+              <div className="text-2xl font-bold text-slate-200">₹30,000</div>
+            </div>
+            <div className="p-4 rounded-xl bg-slate-950 border border-amber-800/40 text-center">
+              <div className="text-xs text-amber-500 font-medium uppercase mb-1">🥉 3rd Place</div>
+              <div className="text-2xl font-bold text-amber-500">₹20,000</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Featured Game Modes Section */}
-      <section id="modes" className="max-w-6xl mx-auto px-2 sm:px-4 space-y-6 sm:space-y-8">
-        <div className="text-center space-y-2 sm:space-y-3">
-          <span className="text-[10px] sm:text-xs font-mono tracking-widest text-cyan-400 uppercase font-bold">COMPETITIVE DISCIPLINES</span>
-          <h2 className="font-orbitron font-black text-2xl sm:text-3xl md:text-4xl text-white">FEATURED GAME MODES</h2>
+      <section id="modes" className="max-w-6xl mx-auto space-y-6">
+        <div className="text-center space-y-1">
+          <span className="text-xs text-cyan-400 uppercase font-semibold tracking-wider">Featured Disciplines</span>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white">Tournament Games</h2>
         </div>
 
         {/* Tab Selection */}
-        <div className="flex justify-center flex-wrap gap-2 sm:gap-3 border-b border-white/10 pb-4">
+        <div className="flex justify-center flex-wrap gap-2 border-b border-slate-800 pb-4">
           {Object.keys(gameModes).map(key => (
             <button 
               key={key}
               onClick={() => setActiveTab(key)}
-              className={`px-4 py-2.5 sm:px-6 sm:py-3 rounded-xl font-orbitron font-bold text-xs uppercase tracking-wider transition min-h-[44px] ${
-                activeTab === key ? 'bg-cyan-500 text-black shadow-lg glow-cyan' : 'bg-slate-900/60 text-slate-400 hover:text-white border border-white/10'
+              className={`px-5 py-2 rounded-lg font-medium text-xs uppercase tracking-wider transition ${
+                activeTab === key ? 'bg-cyan-600 text-white font-semibold' : 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800'
               }`}
             >
               {gameModes[key].icon} {gameModes[key].title}
@@ -189,37 +150,30 @@ export default function HomePage({ onNavigateToFixtures }) {
         </div>
 
         {/* Selected Mode Detail Card */}
-        <div className={`p-5 sm:p-8 rounded-2xl border ${gameModes[activeTab].accent} cyber-glass grid grid-cols-1 md:grid-cols-3 gap-6 items-center`}>
-          <div className="md:col-span-2 space-y-3 text-left">
+        <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+          <div className="md:col-span-2 space-y-2 text-left">
             <span className="text-3xl">{gameModes[activeTab].icon}</span>
-            <h3 className="font-orbitron font-black text-xl sm:text-2xl text-white">{gameModes[activeTab].title}</h3>
-            <h4 className="text-xs sm:text-sm font-mono text-cyan-300">{gameModes[activeTab].subtitle}</h4>
+            <h3 className="text-xl font-bold text-white">{gameModes[activeTab].title}</h3>
+            <h4 className="text-xs font-semibold text-cyan-400">{gameModes[activeTab].subtitle}</h4>
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">{gameModes[activeTab].desc}</p>
           </div>
 
-          <div className="p-4 sm:p-5 rounded-xl bg-black/40 border border-white/10 space-y-2.5 sm:space-y-3 font-mono text-xs">
-            <div className="flex justify-between py-1 border-b border-white/10">
-              <span className="text-slate-400">Tournament Scale:</span>
-              <span className="text-white font-bold">{gameModes[activeTab].stats.teams}</span>
+          <div className="p-4 rounded-lg bg-slate-950 border border-slate-800 space-y-2 text-xs">
+            <div className="flex justify-between py-1 border-b border-slate-800">
+              <span className="text-slate-400">Scale:</span>
+              <span className="text-white font-medium">{gameModes[activeTab].stats.teams}</span>
             </div>
-            <div className="flex justify-between py-1 border-b border-white/10">
-              <span className="text-slate-400">Official Arena:</span>
-              <span className="text-cyan-300 font-bold">{gameModes[activeTab].stats.map}</span>
+            <div className="flex justify-between py-1 border-b border-slate-800">
+              <span className="text-slate-400">Arena:</span>
+              <span className="text-cyan-300 font-medium">{gameModes[activeTab].stats.arena}</span>
             </div>
             <div className="flex justify-between py-1">
-              <span className="text-slate-400">Match Format:</span>
-              <span className="text-amber-300 font-bold">{gameModes[activeTab].stats.mode}</span>
+              <span className="text-slate-400">Format:</span>
+              <span className="text-amber-300 font-medium">{gameModes[activeTab].stats.mode}</span>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="border-t border-white/10 pt-8 pb-4 text-center text-xs text-slate-500">
-        <div className="font-mono text-[10px] sm:text-[11px] text-slate-600">
-          © 2026 NEXUS ARENA ESPORTS. All rights reserved.
-        </div>
-      </footer>
 
     </div>
   );

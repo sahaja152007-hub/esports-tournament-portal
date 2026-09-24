@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Swords, Trophy, Menu, X } from 'lucide-react';
+import { Trophy, Menu, X, Shield } from 'lucide-react';
 import HomePage from './components/HomePage';
 import TeamFixturePage from './components/TeamFixturePage';
 
@@ -13,75 +13,75 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#090a0f] bg-cyber-grid text-slate-100 flex flex-col selection:bg-cyan-500 selection:text-black overflow-x-hidden">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-cyan-500 selection:text-white font-sans">
       
       {/* Top Navigation Bar */}
-      <header className="sticky top-0 z-40 bg-[#090a0f]/95 backdrop-blur-xl border-b border-cyan-500/20 px-4 lg:px-8 py-3 transition-all">
+      <header className="sticky top-0 z-40 bg-slate-900 border-b border-slate-800 px-4 lg:px-8 py-3.5">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           
           {/* Brand Logo */}
           <div 
             onClick={() => handleNavClick('home')}
-            className="flex items-center gap-2.5 sm:gap-3 cursor-pointer group"
+            className="flex items-center gap-3 cursor-pointer"
           >
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-black shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform shrink-0">
-              <Swords className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" />
+            <div className="w-9 h-9 rounded-lg bg-cyan-600 flex items-center justify-center text-white font-bold text-lg shrink-0">
+              ⚡
             </div>
             <div>
-              <div className="font-orbitron font-black text-lg sm:text-xl tracking-wider text-white leading-none flex items-center gap-1">
-                NEXUS<span className="text-cyan-400">ARENA</span>
+              <div className="font-bold text-lg text-white leading-none tracking-tight flex items-center gap-1.5">
+                NMIMS <span className="text-cyan-400">ESPORTS 2026</span>
               </div>
-              <span className="text-[9px] sm:text-[10px] font-mono text-slate-400 tracking-widest uppercase block mt-0.5">ESPORTS LEAGUE 2026</span>
+              <span className="text-[10px] text-slate-400 uppercase tracking-wider block mt-0.5 font-mono">College Tournament Portal</span>
             </div>
           </div>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-2 bg-slate-900/80 p-1 rounded-xl border border-white/10">
+          <nav className="hidden md:flex items-center gap-1.5 bg-slate-950/60 p-1 rounded-lg border border-slate-800">
             <button 
               onClick={() => handleNavClick('home')}
-              className={`px-4 py-2 rounded-lg font-orbitron font-bold text-xs uppercase tracking-wider transition ${
-                activePage === 'home' ? 'bg-cyan-500 text-black shadow-md glow-cyan' : 'text-slate-400 hover:text-white'
+              className={`px-4 py-1.5 rounded-md font-medium text-xs uppercase tracking-wider transition ${
+                activePage === 'home' ? 'bg-cyan-600 text-white font-semibold' : 'text-slate-400 hover:text-white'
               }`}
             >
               Home
             </button>
             <button 
               onClick={() => handleNavClick('fixtures')}
-              className={`px-4 py-2 rounded-lg font-orbitron font-bold text-xs uppercase tracking-wider transition flex items-center gap-1.5 ${
-                activePage === 'fixtures' ? 'bg-cyan-500 text-black shadow-md glow-cyan' : 'text-slate-400 hover:text-white'
+              className={`px-4 py-1.5 rounded-md font-medium text-xs uppercase tracking-wider transition flex items-center gap-1.5 ${
+                activePage === 'fixtures' ? 'bg-cyan-600 text-white font-semibold' : 'text-slate-400 hover:text-white'
               }`}
             >
-              <Trophy className="w-3.5 h-3.5" /> Teams & Fixtures
+              <Trophy className="w-3.5 h-3.5 text-amber-400" /> Teams & Fixtures
             </button>
           </nav>
 
           {/* Mobile Hamburger Toggle Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-xl bg-slate-900 border border-white/10 text-slate-300 hover:text-white focus:outline-none"
+            className="md:hidden p-2 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 hover:text-white focus:outline-none"
             aria-label="Toggle Navigation Menu"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6 text-cyan-400" /> : <Menu className="w-6 h-6 text-slate-300" />}
+            {mobileMenuOpen ? <X className="w-5 h-5 text-cyan-400" /> : <Menu className="w-5 h-5 text-slate-300" />}
           </button>
 
         </div>
 
         {/* Mobile Dropdown Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden pt-3 pb-2 border-t border-white/10 mt-3 animate-fade-in">
-            <nav className="flex flex-col gap-2 font-orbitron font-bold text-xs uppercase tracking-wider">
+          <div className="md:hidden pt-3 pb-2 border-t border-slate-800 mt-3">
+            <nav className="flex flex-col gap-2 text-xs uppercase font-semibold">
               <button 
                 onClick={() => handleNavClick('home')}
-                className={`w-full py-3 px-4 rounded-xl text-left transition flex items-center gap-2 ${
-                  activePage === 'home' ? 'bg-cyan-500 text-black shadow-md glow-cyan' : 'bg-slate-900/80 text-slate-300 border border-white/5'
+                className={`w-full py-2.5 px-4 rounded-lg text-left transition ${
+                  activePage === 'home' ? 'bg-cyan-600 text-white' : 'bg-slate-900 text-slate-300 border border-slate-800'
                 }`}
               >
-                <span>Home</span>
+                Home
               </button>
               <button 
                 onClick={() => handleNavClick('fixtures')}
-                className={`w-full py-3 px-4 rounded-xl text-left transition flex items-center gap-2 ${
-                  activePage === 'fixtures' ? 'bg-cyan-500 text-black shadow-md glow-cyan' : 'bg-slate-900/80 text-slate-300 border border-white/5'
+                className={`w-full py-2.5 px-4 rounded-lg text-left transition flex items-center gap-2 ${
+                  activePage === 'fixtures' ? 'bg-cyan-600 text-white' : 'bg-slate-900 text-slate-300 border border-slate-800'
                 }`}
               >
                 <Trophy className="w-4 h-4 text-amber-400" /> <span>Teams & Fixtures</span>
@@ -92,13 +92,20 @@ export default function App() {
       </header>
 
       {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 pt-4 sm:pt-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {activePage === 'home' ? (
           <HomePage onNavigateToFixtures={() => handleNavClick('fixtures')} />
         ) : (
           <TeamFixturePage />
         )}
       </main>
+
+      {/* Simple Footer */}
+      <footer className="border-t border-slate-900 py-6 text-center text-xs text-slate-500">
+        <div className="max-w-7xl mx-auto px-4">
+          NMIMS Esports Tournament 2026 • Student Organized Campus Event
+        </div>
+      </footer>
 
     </div>
   );
